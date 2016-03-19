@@ -1,0 +1,181 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    <bean id="customerService" class="com.mkyong.customer.services.CustomerService">
+        <property name="name" value="Yong Mook Kim" />
+        <property name="url" value="http://www.mkyong.com" />
+    </bean>
+
+    <bean id="customerService0" class="com.mkyong.customer.services.CustomerService0">
+        <property name="name" value="Yong Mook Kim" />
+        <property name="url" value="http://www.mkyong.com" />
+    </bean>-->
+
+
+    <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="driverUrl">
+            <value>jdbc:mysql://localhost:3306/kaze?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true</value>
+        </property>
+        <property name="user">
+            <value>root</value>
+        </property>
+        <property name="password">
+            <value>Pwq2080064</value>
+        </property>
+        <property name="alias">
+            <value>kaze</value>
+        </property>
+        <!--保留线程处于睡眠状态的最长时间 -->
+        <property name="houseKeepingSleepTime">
+            <value>30000</value>
+        </property><!-- 默认 30000 -->
+        <property name="houseKeepingTestSql">
+            <value>select 1</value>
+        </property>
+        <!--可用的连接数量 -->
+        <property name="prototypeCount">
+            <value>30</value>
+        </property>
+        <!--线程的最长活动时间 -->
+        <property name="maximumActiveTime">
+            <value>300000</value>
+        </property><!-- 默认 300000 -->
+        <!--线程的最大寿命 -->
+        <property name="maximumConnectionLifetime">
+            <value>300000</value>
+        </property><!-- 默认 300000 -->
+        <!--最大的数据库连接数 -->
+        <property name="maximumConnectionCount">
+            <value>40</value>
+        </property>
+        <!--最小的数据库连接数 -->
+        <property name="minimumConnectionCount">
+            <value>10</value>
+        </property>
+        <!-- 是否记录proxool日志 -->
+        <property name="trace">
+            <value>true</value>
+        </property>
+        <property name="verbose">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <!-- 自动扫描的包 -->
+        <property name="packagesToScan" value="com.pwq.entity"/>
+
+        <property name="hibernateProperties">
+            <props>
+                <!-- MYSQL 数据库优化，不同数据库对应不同的key
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.query.substitutions"> true 'Y', false 'N' </prop>
+
+                <!-- 查询缓存 -->
+                <!--<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>-->
+                <!-- 2级缓存 -->
+              <!--  <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>-->
+
+
+
+                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 把所有的SQL语句都输出到控制台 。true：输出到控制台
+                <prop key="hibernate.show_sql">true</prop>-->
+
+                <!--连接池释放-->
+                <prop key="hibernate.connection.release_mode">auto</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+
+                <!-- Fetch Size 是设定JDBC的Statement读取数据的时候每次从数据库中取出的记录条数,我建议使用Oracle的最好将Fetch Size设到50-->
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <!-- atch Size是设定对数据库进行批量删除，批量更新和批量插入的时候的批次大小,我建议使用Oracle的最好将Batch Size设到30~50-->
+                <prop key="hibernate.jdbc.batch_size">30</prop>
+
+                <prop key="hibernate.autoReconnect">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+
+   <!-- <bean id="cacheManager"
+
+          class="org.springmodules.cache.provider.oscache.OsCacheManagerFactoryBean">
+
+        &lt;!&ndash; Optional properties &ndash;&gt;
+
+        <property name="configLocation" value="classpath:oscache.properties"/>
+
+    </bean>
+
+    <bean id="cacheProviderFacade"
+
+          class="org.springmodules.cache.provider.oscache.OsCacheFacade">
+
+        <property name="cacheManager" ref="cacheManager"/>
+
+    </bean>
+
+    <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>-->
+
+
+
+    <!--使用强大的切点表达式语言轻松定义目标方法 -->
+    <aop:config>
+        <!-- 通过aop定义事务增强切面 -->
+        <!-- 特别说明:在项目开始前类命名统一规范很重要！！！ -->
+        <aop:pointcut id="serviceMethod" expression="execution(* com.pwq.service.*Service.*(..))" />
+        <!-- 引用事务增强 -->
+        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice" />
+    </aop:config>
+
+    <!-- 事务增强 ：设置只读事务等 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!-- 事务属性定义 -->
+        <tx:attributes>
+            <!-- 申明以get开头的方法为只读事务 -->
+            <tx:method name="get*" read-only="true"  />
+            <!-- 申明以load开头的方法为只读事务 -->
+            <tx:method name="load*" read-only="true" />
+            <!-- 申明以query开头的方法为只读事务 -->
+            <tx:method name="query*" read-only="true"/>
+            <!-- 申明以find开头的方法为只读事务 -->
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 扫描cn.zeale.service包下所有标注@Service的服务组件 -->
+    <context:component-scan base-package="com.pwq.*" />
+
+    <!-- 此方式仅仅支持注解 不支持XML,如果要注入到代码中,bean要指定一个ID名称 -->
+  <!--  <bean id="public" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:public.properties" />
+    </bean>-->
+</beans>
