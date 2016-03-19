@@ -25,7 +25,6 @@
     <SOURCES>
       <root url="jar://$USER_HOME$/.ideaLibSources/spring-beans-4.2.5.RELEASE-sources.jar!/" />
       <root url="jar://$USER_HOME$/.ideaLibSources/spring-context-4.2.5.RELEASE-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.ideaLibSources/spring-aop-4.2.5.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

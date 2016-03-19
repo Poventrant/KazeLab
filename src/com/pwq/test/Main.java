@@ -13,7 +13,7 @@ public class Main {
 						new String[]{"applicationContext.xml"} );
 
 		UserController userController = (UserController) appContext.getBean("userController");
-		System.out.println(userController.getUserService().findById(0));
+		System.out.println(userController.getUserService().findById(1).getName());
 
 		/*UserDao userDao = (UserDao) appContext.getBean("userRepository");
 		System.out.println(userDao.getSession());*/

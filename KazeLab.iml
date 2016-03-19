@@ -47,5 +47,6 @@
     <orderEntry type="library" name="aspectj:aspectjweaver:1.5.3" level="project" />
     <orderEntry type="library" name="log4j-1.2.16" level="project" />
     <orderEntry type="library" name="com.cloudhopper.proxool:proxool:0.9.1" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.33-bin" level="project" />
   </component>
 </module>
