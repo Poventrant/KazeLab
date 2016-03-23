@@ -1,19 +1,18 @@
 package com.pwq.test;
 
-import com.pwq.controller.UserController;
-import com.pwq.dao.UserDao;
-import com.pwq.entity.User;
-import com.pwq.service.KazeServiceImpl0;
 import com.pwq.service.UserService;
-import org.logicalcobwebs.proxool.ProxoolDataSource;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
+
+	static Logger log = Logger.getLogger(Main.class.getName());
+
 	public static void main(String[] args) {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext(
 						new String[]{"applicationContext.xml"} );
-
+		log.info("Going to create HelloWord Obj");
 		/*UserController userController = (UserController) appContext.getBean("userController");
         userController.getUserService().add();*/
 
