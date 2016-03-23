@@ -14,10 +14,12 @@ public class Main {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext(
 						new String[]{"applicationContext.xml"} );
 
-		UserController userController = (UserController) appContext.getBean("userController");
-        userController.getUserService().add();
+		/*UserController userController = (UserController) appContext.getBean("userController");
+        userController.getUserService().add();*/
 
         System.out.println( (appContext.getBean("kazeServiceImpl0") instanceof UserService) );
+
+		appContext.getBean("kazeServiceImpl0");
 
         /*String[] beans = appContext.getBeanDefinitionNames();
         for(String s : beans) {
