@@ -53,5 +53,6 @@
     <orderEntry type="library" name="oscache-2.4" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-ehcache:4.2.2.Final" level="project" />
     <orderEntry type="library" name="org.springmodules:spring-modules-cache:0.8" level="project" />
+    <orderEntry type="library" name="fastjson-1.2.7" level="project" />
   </component>
 </module>
