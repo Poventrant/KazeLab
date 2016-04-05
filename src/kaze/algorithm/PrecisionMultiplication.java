@@ -22,6 +22,15 @@ public class PrecisionMultiplication {
         for (int i = 0; i < alen; i++) ai[alen - i] = as.charAt(i) - 48;
         for (int i = 0; i < blen; i++) bi[blen - i] = bs.charAt(i) - 48;
 
+        for(int s : ai) {
+            System.out.print(s);
+        }
+        System.out.print("\n");
+        for(int s : bi) {
+            System.out.print(s);
+        }
+        System.out.print("\n");
+
         for (int i = 1; i <= alen; i++) {
             int x = 0;
             for (int j = 1; j <= blen; j++) {
