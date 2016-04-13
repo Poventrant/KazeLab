@@ -5,11 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD) //can use in method only.
-public @interface Test {
+@Target({ElementType.TYPE})
 
-	//should ignore this test?
-	public boolean enabled() default true;
-	
+@Retention(RetentionPolicy.RUNTIME)
+
+public @interface ClassAnnotation {
+    String value() default "";
 }
