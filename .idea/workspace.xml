@@ -1,65 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7a8dc64-1b07-42f5-b2fb-6235d2b4a94a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/Consumer.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/EmailServiceImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/EmailServiceInjector.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/MessageService.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/MessageServiceInjector.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/MyDIApplication.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/MyMessageDITest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/SMSServiceImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/journaldev/java/legacy/SMSServiceInjector.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/pwq/dao/BaseDaoImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/pwq/dao/UserDaoImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/pwq/service/BaseServiceImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/pwq/service/KazeServiceImpl0.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/pwq/service/UserServiceImpl.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/reflect/fanlei/Entity.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/reflect/fanlei/GenTypeTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/com/reflect/fanlei/User.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/gson/Account.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/gson/User.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/gson/test.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/kaze/thread/ThreadPoolLab$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/kaze/thread/ThreadPoolLab.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/net/collections/test/ConcurrentMapTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jar/sysu_jwst.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-pool2-2.3.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/fastjson-1.2.7.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jedis-2.8.0-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jedis-2.8.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/fastjson_1_2_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/redis_clients_jedis_2_8_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/log4j.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/oscache.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/jedis/Connector.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/jedis/JedisConnectorPool.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gson/Account.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gson/User.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gson/test.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/AnnotationScanner.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/AnnotationTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/ClassAnnotation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/MethodAnnotation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/RunTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/Test.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/TestExample.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/annotation/TesterInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/reflect/MainRunTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/thread/ThreadPoolLab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/virtualMachine/ClassLoaderTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kaze/virtualMachine/JarClassLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/pwq/controller/UserController.class" afterPath="$PROJECT_DIR$/bin/com/pwq/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Spring_4_2_5_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Spring_4_2_5_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KazeLab.iml" afterPath="$PROJECT_DIR$/KazeLab.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pwq/controller/UserController.java" afterPath="$PROJECT_DIR$/src/com/pwq/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/reflect/fanlei/GenTypeTest.java" afterPath="$PROJECT_DIR$/src/com/reflect/fanlei/GenTypeTest.java" />
-    </list>
+    <list default="true" id="d7a8dc64-1b07-42f5-b2fb-6235d2b4a94a" name="Default" comment="" />
     <ignored path="KazeLab.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -124,8 +66,8 @@
       <file leaf-file-name="JarClassLoader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kaze/virtualMachine/JarClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2467948">
-              <caret line="56" column="59" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.5977564">
+              <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1070,18 +1012,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1663000" />
+    <option name="totallyTimeSpent" value="1762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3281893" sideWeight="0.5416667" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3281893" sideWeight="0.45833334" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3281893" sideWeight="0.45833334" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1514,8 +1456,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kaze/virtualMachine/JarClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2467948">
-          <caret line="56" column="59" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.5977564">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
