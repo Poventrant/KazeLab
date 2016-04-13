@@ -31,6 +31,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/spring" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/public" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/jar" type="java-resource" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
@@ -53,5 +54,7 @@
     <orderEntry type="library" name="oscache-2.4" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-ehcache:4.2.2.Final" level="project" />
     <orderEntry type="library" name="org.springmodules:spring-modules-cache:0.8" level="project" />
+    <orderEntry type="library" name="fastjson-1.2.7" level="project" />
+    <orderEntry type="library" name="redis.clients:jedis:2.8.0" level="project" />
   </component>
 </module>

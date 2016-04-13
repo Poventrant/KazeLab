@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  */
 @Controller("userController")
 public class UserController {
-    @Resource(name="kazeServiceImpl0")
+    @Resource(name="userServiceImpl")
     private UserService userService;
 
     public UserService getUserService() {
