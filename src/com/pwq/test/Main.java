@@ -1,5 +1,6 @@
 package com.pwq.test;
 
+import com.pwq.service.AspectTest;
 import com.pwq.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -16,9 +17,20 @@ public class Main {
 		/*UserController userController = (UserController) appContext.getBean("userController");
         userController.getUserService().add();*/
 
-        System.out.println( (appContext.getBean("kazeServiceImpl0") instanceof UserService) );
+        UserService userService  = (UserService) appContext.getBean("userServiceImpl");
 
-		appContext.getBean("kazeServiceImpl0");
+        userService.add();
+        userService.add();
+        System.out.println(userService.sum());
+
+        AspectTest ast = new AspectTest();
+        ast.test();
+
+        ast = (AspectTest)appContext.getBean("aspectTest");
+        ast.test();
+
+
+//		appContext.getBean("kazeServiceImpl0");
 
         /*String[] beans = appContext.getBeanDefinitionNames();
         for(String s : beans) {

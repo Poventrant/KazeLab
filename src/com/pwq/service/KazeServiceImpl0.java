@@ -28,4 +28,7 @@ public class KazeServiceImpl0 extends BaseServiceImpl<User> implements UserServi
         System.out.println("KazeServiceImpl0");
     }
 
+    public int sum() {
+        return -1;
+    }
 }

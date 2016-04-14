@@ -138,7 +138,8 @@
 
     <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>
 
-
+    <!-- 开启切面自动代理 -->
+    <aop:aspectj-autoproxy />
 
     <!--使用强大的切点表达式语言轻松定义目标方法 -->
     <aop:config>
@@ -169,10 +170,14 @@
     <tx:annotation-driven/>
 
     <!-- 扫描cn.zeale.service包下所有标注@Service的服务组件 -->
-    <context:component-scan base-package="com.pwq.*" />
+    <context:component-scan base-package="com.pwq.controller" />
+    <context:component-scan base-package="com.pwq.service" />
+    <context:component-scan base-package="com.pwq.dao" />
+    <bean name="userServiceImplAspect" class="com.pwq.aspect.UserServiceImplAspect"></bean>
+
 
     <!-- 此方式仅仅支持注解 不支持XML,如果要注入到代码中,bean要指定一个ID名称 -->
-  <!--  <bean id="public" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <!--  <bean id="public" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="location" value="classpath:public.properties" />
-    </bean>-->
+    </bean>  -->
 </beans>

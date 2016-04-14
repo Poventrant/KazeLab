@@ -31,6 +31,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/spring" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/public" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/jar" type="java-resource" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />

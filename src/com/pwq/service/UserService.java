@@ -14,4 +14,6 @@ import javax.annotation.Resource;
  */
 public interface UserService extends BaseService<User>{
     void add();
+
+    int  sum();
 }
