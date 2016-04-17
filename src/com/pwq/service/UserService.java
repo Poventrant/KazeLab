@@ -16,4 +16,6 @@ public interface UserService extends BaseService<User>{
     void add();
 
     int  sum();
+
+    public void queryByProperties(User user);
 }

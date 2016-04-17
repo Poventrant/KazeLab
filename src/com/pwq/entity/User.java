@@ -22,8 +22,12 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	@Id
+    @Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {

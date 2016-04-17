@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by 枫叶 on 2016/3/20.
@@ -49,5 +50,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     public void setTest(int test) {
         this.test = test;
+    }
+
+    public void queryByProperties(User user) {
+        update(user);
     }
 }

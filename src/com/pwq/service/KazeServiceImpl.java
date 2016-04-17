@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Lazy(true)
-public class KazeServiceImpl0 extends BaseServiceImpl<User> implements UserService {
+public class KazeServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Autowired
     protected UserDao userDao;
@@ -30,5 +30,10 @@ public class KazeServiceImpl0 extends BaseServiceImpl<User> implements UserServi
 
     public int sum() {
         return -1;
+    }
+
+    @Override
+    public void queryByProperties(User user) {
+
     }
 }
