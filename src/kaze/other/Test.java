@@ -7,11 +7,11 @@ public class Test {
     public static int i = print("i");
     public static int n = 99;
     private int a = 0;
-    public int j = print("j");
-
     {
         print("构造块");
     }
+
+    public int j = print("j");
 
     static {
         print("静态块");
@@ -30,6 +30,27 @@ public class Test {
     }
 
     public static void main(String args[]) {
-        Test t = new Test("init");
+        Son t = new Son("init");
+    }
+
+    static class Son extends Test {
+
+        public static int si = print("si static son");
+
+        public int sj = print("sj son");
+
+        static {
+            System.out.println("son static constructor block");
+        }
+
+        {
+            System.out.println("son constructor block");
+        }
+
+
+        public Son(String str) {
+            super(str);
+            System.out.println("son constructor");
+        }
     }
 }

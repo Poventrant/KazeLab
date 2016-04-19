@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  */
 public class ThreadPoolLab {
 
-    final static int POOL_SIZE = 10;
+    final static int POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
     public static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(5);
 
@@ -22,15 +22,10 @@ public class ThreadPoolLab {
 
         private CountDownLatch counter;
 
-        Worker() {
-        }
-
         @Override
         public void run() {
             try {
                 System.out.println("Thread " + Thread.currentThread().getId() + ": " + url);
-             /*   Thread.sleep(2000);
-            } catch (InterruptedException e) {*/
             } finally {
                 counter.countDown();
                 //空闲当前线程
@@ -171,74 +166,14 @@ public class ThreadPoolLab {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new AuthorWorker("1.com", "13349086", 7).start();
-        new AuthorWorker("2.com", "13349086", 7).start();
-        new AuthorWorker("3.com", "13349086", 7).start();
-        new AuthorWorker("4.com", "13349086", 7).start();
-        new AuthorWorker("5.com", "13349086", 7).start();
-        new AuthorWorker("6.com", "13349086", 7).start();
-        new AuthorWorker("7.com", "13349086", 7).start();
-        new AuthorWorker("8.com", "13349086", 7).start();
-        new AuthorWorker("9.com", "13349086", 7).start();
-        new AuthorWorker("10.com", "13349086", 7).start();
-        new AuthorWorker("11.com", "13349086", 7).start();
+
+        for (int i = 0; i < 100; i++) {
+           new AuthorWorker(i+".com", "13349086", i).start();
+        }
 
         /*EXECUTOR.shutdown();
         EXECUTOR.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         System.out.println("All task finished!!!");*/
     }
 
-//   static Worker[] WORKER = new Worker[POOL_SIZE];
-//
-//    static {
-//        for (int i = 0; i < POOL_SIZE; i ++) {
-//            WORKER[i] = new Worker();
-//        }
-//    }
-//    public static void main(String[] args) throws InterruptedException {
-//
-//        // 固定工作线程数量的线程池
-//        ExecutorService executorService1 = Executors.newFixedThreadPool(20);
-//
-//
-//        CountDownLatch latch = new CountDownLatch(POOL_SIZE);
-//        for (int i = 0; i < POOL_SIZE; i ++) {
-//            WORKER[i] = new Worker();
-//            WORKER[i].setCounter(latch);
-//            executorService1.execute(WORKER[i]);
-//        }
-//        try {
-//            latch.await();
-//        } finally {
-//            System.out.println("terminate!!");
-//        }
-//
-//        latch = new CountDownLatch(POOL_SIZE - 4);
-//        for (int i = 0; i < POOL_SIZE - 4; i ++) {
-//            WORKER[i].setUrl("test" + i);
-//            WORKER[i].setCounter(latch);
-//            executorService1.execute(WORKER[i]);
-//        }
-//        try {
-//            latch.await();
-//        } finally {
-//            System.out.println("terminate!!");
-//        }
-//
-//        latch = new CountDownLatch(POOL_SIZE - 8);
-//        for (int i = 0; i < POOL_SIZE - 8; i ++) {
-//            WORKER[i].setUrl("excuse me ? " + i);
-//            WORKER[i].setCounter(latch);
-//            executorService1.execute(WORKER[i]);
-//        }
-//        try {
-//            latch.await();
-//        } finally {
-//            System.out.println("terminate!!");
-//        }
-//
-//        executorService1.shutdown();
-//        executorService1.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-//        System.out.println("Test finished!!!");
-//    }
 }
