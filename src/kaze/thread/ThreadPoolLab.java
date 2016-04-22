@@ -168,7 +168,7 @@ public class ThreadPoolLab {
     public static void main(String[] args) throws InterruptedException {
 
         for (int i = 0; i < 100; i++) {
-           new AuthorWorker(i+".com", "13349086", i).start();
+           new AuthorWorker(i+".com", "", i).start();
         }
 
         /*EXECUTOR.shutdown();
