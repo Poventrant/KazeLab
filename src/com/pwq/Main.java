@@ -1,6 +1,6 @@
 package com.pwq;
 
-import com.pwq.service.AspectTest;
+import com.pwq.entity.User;
 import com.pwq.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -11,23 +11,23 @@ public class Main {
 	static Logger log = Logger.getLogger(Main.class.getName());
 
 	public static void main(String[] args) {
-		ApplicationContext appContext = new ClassPathXmlApplicationContext(
-						new String[]{"applicationContext.xml"} );
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		log.info("Going to create HelloWord Obj");
 		/*UserController userController = (UserController) appContext.getBean("userController");
         userController.getUserService().add();*/
 
         UserService userService  = (UserService) appContext.getBean("userServiceImpl");
 
-        userService.add();
-        userService.add();
-        System.out.println(userService.sum());
-
-        AspectTest ast = new AspectTest();
-        ast.test();
-
-        ast = (AspectTest)appContext.getBean("aspectTest");
-        ast.test();
+        userService.get(1);
+		userService.save(new User(2, "pwq"));
+//        userService.add();
+//        System.out.println(userService.sum());
+//
+//        AspectTest ast = new AspectTest();
+//        ast.test();
+//
+//        ast = (AspectTest)appContext.getBean("aspectTest");
+//        ast.test();
 
 
 //		appContext.getBean("kazeServiceImpl0");

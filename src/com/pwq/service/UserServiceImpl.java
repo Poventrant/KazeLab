@@ -10,6 +10,8 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,13 +33,23 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     public void add() {
-        /*userDao.persist(user);
-       *//* try {
+       userDao.update(new User(1, "kaze"));
+      /* try {
             int i = 4 / 0;  //制造异常，检测回滚事务
         } catch (Exception e) {
             e.printStackTrace();
         }*/
         System.out.println("UserServiceImpl.add()");
+    }
+
+    @Override
+    public User get(int userId) {
+        return userDao.get(1);
+    }
+
+    @Override
+    public void save(User user) {
+        persist(user);
     }
 
     public int sum() {

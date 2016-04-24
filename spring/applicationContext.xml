@@ -119,7 +119,7 @@
     <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>
 
     <!-- 开启切面自动代理 -->
-    <aop:aspectj-autoproxy />
+    <!--<aop:aspectj-autoproxy />-->
 
     <!--使用强大的切点表达式语言轻松定义目标方法 -->
     <aop:config>
