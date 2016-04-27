@@ -119,7 +119,7 @@
     <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>
 
     <!-- 开启切面自动代理 -->
-    <aop:aspectj-autoproxy />
+    <!--<aop:aspectj-autoproxy />-->
 
     <!--使用强大的切点表达式语言轻松定义目标方法 -->
     <aop:config>
@@ -147,7 +147,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <tx:annotation-driven/>
+    <!--<tx:annotation-driven/>-->
 
     <!-- 扫描cn.zeale.service包下所有标注@Service的服务组件 -->
     <context:component-scan base-package="com.pwq.controller" />
@@ -161,9 +161,9 @@
         <property name="location" value="classpath:public.properties" />
     </bean>  -->
 
-   <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
-        <property name="test" value="pwq"></property>
-    </bean>-->
+    <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
+         <property name="test" value="pwq"></property>
+     </bean>-->
     <bean id="pwqService" class="com.pwq.service.PwqServiceImpl" >
         <constructor-arg index="0" type="java.lang.String" value="constructor pwq"></constructor-arg>
     </bean>

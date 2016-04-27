@@ -3,16 +3,14 @@ package com.pwq.service;
 import com.pwq.dao.BaseDao;
 import com.pwq.dao.UserDao;
 import com.pwq.entity.User;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.transaction.TransactionManager;
 
 /**
  * Created by 枫叶 on 2016/3/20.
@@ -31,12 +29,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     public void add() {
-        /*userDao.persist(user);
-       *//* try {
-            int i = 4 / 0;  //制造异常，检测回滚事务
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        userDao.persist(new User(2, "kaze"));
+            //异常捕获，事务不会滚
+//            int i = 4 / 0;  //制造异常，检测回滚事务
         System.out.println("UserServiceImpl.add()");
     }
 
