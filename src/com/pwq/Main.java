@@ -1,6 +1,6 @@
 package com.pwq;
 
-import com.pwq.service.AspectTest;
+import com.pwq.entity.User;
 import com.pwq.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
