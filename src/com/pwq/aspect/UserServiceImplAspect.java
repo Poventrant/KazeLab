@@ -1,23 +1,10 @@
 package com.pwq.aspect;
 
-import com.pwq.dao.BaseDao;
-import com.pwq.dao.UserDao;
-import com.pwq.entity.User;
-import com.pwq.service.BaseServiceImpl;
-import com.pwq.service.UserService;
 import com.pwq.service.UserServiceImpl;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * Created by 枫叶 on 2016/3/20.

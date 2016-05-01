@@ -3,6 +3,7 @@ package com.jedis;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.Pipeline;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,22 @@ public class Connector {
         for(Map.Entry<String, String> e : map.entrySet()) {
             System.out.println(e.getKey() + ":" + e.getValue());
         }
+
+        Long start = System.currentTimeMillis();
+        Pipeline p = jedis.pipelined();
+        for (int i = 0; i < 100000; i++) {
+            p.set(String.valueOf(i),String.valueOf(i));
+        }
+        p.sync();
+        Long end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            jedis.set(String.valueOf(i),String.valueOf(i));
+        }
+        end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
 
 /*
         Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();

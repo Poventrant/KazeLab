@@ -15,8 +15,8 @@ public class GenTypeTest extends Entity<User>{
         try {
             Field field = String.class.getDeclaredField("hash");
             Type type = field.getGenericType();
-            String typeName = ((Class) type).getTypeName();
-            System.out.println(typeName);
+//            String typeName = ((Class) type).getTypeName();
+//            System.out.println(typeName);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }

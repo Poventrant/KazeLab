@@ -1,18 +1,16 @@
 package kaze.http;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.omg.CORBA.NameValuePair;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
-
-import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by 枫叶 on 2016/4/16.
  */

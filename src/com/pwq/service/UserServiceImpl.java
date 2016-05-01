@@ -3,14 +3,11 @@ package com.pwq.service;
 import com.pwq.dao.BaseDao;
 import com.pwq.dao.UserDao;
 import com.pwq.entity.User;
-import org.aspectj.lang.annotation.Aspect;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.TransactionManager;
 
 /**
  * Created by 枫叶 on 2016/3/20.
