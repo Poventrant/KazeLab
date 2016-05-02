@@ -11,17 +11,6 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-<!--    <bean id="customerService" class="com.mkyong.customer.services.CustomerService">
-        <property name="name" value="Yong Mook Kim" />
-        <property name="url" value="http://www.mkyong.com" />
-    </bean>
-
-    <bean id="customerService0" class="com.mkyong.customer.services.CustomerService0">
-        <property name="name" value="Yong Mook Kim" />
-        <property name="url" value="http://www.mkyong.com" />
-    </bean>-->
-
-
     <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
         <property name="driver">
             <value>com.mysql.jdbc.Driver</value>
@@ -89,10 +78,8 @@
                 <prop key="hibernate.query.substitutions"> true 'Y', false 'N' </prop>
 
                 <!-- 2级缓存 -->
-                <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
-
-
+                <!--<prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>-->
 
                 <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.format_sql">false</prop>
@@ -122,24 +109,17 @@
     </bean>
 
     <bean id="cacheManager" class="org.springmodules.cache.provider.oscache.OsCacheManagerFactoryBean">
-
-
         <property name="configLocation" value="classpath:oscache.properties"/>
-
     </bean>
 
-    <bean id="cacheProviderFacade"
-
-          class="org.springmodules.cache.provider.oscache.OsCacheFacade">
-
+    <bean id="cacheProviderFacade" class="org.springmodules.cache.provider.oscache.OsCacheFacade">
         <property name="cacheManager" ref="cacheManager"/>
-
     </bean>
 
     <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>
 
     <!-- 开启切面自动代理 -->
-    <aop:aspectj-autoproxy />
+    <!--<aop:aspectj-autoproxy />-->
 
     <!--使用强大的切点表达式语言轻松定义目标方法 -->
     <aop:config>
@@ -167,7 +147,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <tx:annotation-driven/>
+    <!--<tx:annotation-driven/>-->
 
     <!-- 扫描cn.zeale.service包下所有标注@Service的服务组件 -->
     <context:component-scan base-package="com.pwq.controller" />
@@ -180,4 +160,25 @@
     <!--  <bean id="public" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="location" value="classpath:public.properties" />
     </bean>  -->
+
+    <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
+         <property name="test" value="pwq"></property>
+     </bean>-->
+    <bean id="pwqService" class="com.pwq.service.PwqServiceImpl" >
+        <constructor-arg index="0" type="java.lang.String" value="constructor pwq"></constructor-arg>
+    </bean>
+
+    <!--配置bean,配置后该类由spring管理-->
+    <bean name="springAction" class="com.pwq.test.SpringAction" >
+        <!--(3)使用静态工厂的方法注入对象,对应下面的配置文件(3)-->
+        <!--<property name="staticFactoryDao" ref="staticFactoryDao"></property>-->
+        <!--实例工厂注入-->
+        <property name="staticFactoryDao" ref="factoryInstance"></property>
+    </bean>
+
+    <!--(3)此处获取对象的方式是从工厂类中获取静态方法-->
+    <bean name="staticFactoryDao" class="com.pwq.test.StaticDaoFactory" factory-method="getStaticFactoryDaoImpl"></bean>
+
+    <bean name="instanceFactoryDao" class="com.pwq.test.InstanceDaoFactory" ></bean>
+    <bean name="factoryInstance" factory-bean="instanceFactoryDao" factory-method="getFactoryDaoImpl"></bean>
 </beans>

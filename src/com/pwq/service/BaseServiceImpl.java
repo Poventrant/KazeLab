@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Lazy(true)
 public class BaseServiceImpl<E> implements BaseService<E>{
     protected BaseDao<E> dao;
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public E findById(Serializable entityId) {
         return dao.findById(entityId);
     }
@@ -43,72 +42,58 @@ public class BaseServiceImpl<E> implements BaseService<E>{
         dao.deleteByProperties(propName, propValue);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public E getByProperties(String[] propName, Object[] propValue) {
         return dao.getByProperties(propName, propValue);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public E getByProperties(String propName, Object propValue) {
         return dao.getByProperties(propName, propValue);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public E getByProperties(String[] propName, Object[] propValue, Map<String, String> sortedCondition) {
         return dao.getByProperties(propName, propValue, sortedCondition);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public E getByProperties(String propName, Object propValue, Map<String, String> sortedCondition) {
         return dao.getByProperties(propName, propValue, sortedCondition);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String[] propName, Object[] propValue) {
         return dao.queryByProperties(propName, propValue);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String propName, Object propValue) {
         return dao.queryByProperties(propName, propValue);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String[] propName, Object[] propValue, Map<String, String> sortedCondition) {
         return dao.queryByProperties(propName, propValue, sortedCondition);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String propName, Object propValue, Map<String, String> sortedCondition) {
         return dao.queryByProperties(propName, propValue, sortedCondition);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String[] propName, Object[] propValue, Map<String, String> sortedCondition, Integer top) {
         return dao.queryByProperties(propName, propValue, sortedCondition, top);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String[] propName, Object[] propValue, Integer top) {
         return dao.queryByProperties(propName, propValue, top);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String propName, Object propValue, Map<String, String> sortedCondition, Integer top) {
         return dao.queryByProperties(propName, propValue, sortedCondition, top);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryByProperties(String propName, Object propValue, Integer top) {
         return dao.queryByProperties(propName, propValue, top);
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryAll() {
         return dao.queryAll();
     }
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<E> queryAll(Map<String, String> sortedCondition) {
         return dao.queryAll(sortedCondition);
     }

@@ -1,7 +1,7 @@
 package com.string.test;
 
 
-public class StringLab {
+class StringLab {
     //最长公共字符串
     public static String test1 = "ttttttttttxqwrqfvhtrucxsarebfvhtrujtryhxcvbv";
     public static String test2 = "gguvhtrucxtttttttttcxtttttttttx";

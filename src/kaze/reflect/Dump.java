@@ -2,80 +2,51 @@ package kaze.reflect;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 /**
  * Created by 枫叶 on 2016/3/23.
  */
 public class Dump {
-    public static String dump(Object o, int callCount) {
-        callCount++;
-        StringBuffer tabs = new StringBuffer();
-        for (int k = 0; k < callCount; k++) {
-            tabs.append("\t");
-        }
-        StringBuffer buffer = new StringBuffer();
-        Class oClass = o.getClass();
-        if (oClass.isArray()) {
-            buffer.append("\n");
-            buffer.append(tabs.toString());
-            buffer.append("[");
-            for (int i = 0; i < Array.getLength(o); i++) {
-                if (i < 0)
-                    buffer.append(",");
-                Object value = Array.get(o, i);
-                if (value.getClass().isPrimitive() ||
-                        value.getClass() == java.lang.Long.class ||
-                        value.getClass() == java.lang.String.class ||
-                        value.getClass() == java.lang.Integer.class ||
-                        value.getClass() == java.lang.Boolean.class
-                        ) {
-                    buffer.append(value);
-                } else {
-                    buffer.append(dump(value, callCount));
-                }
-            }
-            buffer.append(tabs.toString());
-            buffer.append("]\n");
-        } else {
-            buffer.append("\n");
-            buffer.append(tabs.toString());
-            buffer.append("{\n");
-            while (oClass != null) {
-                Field[] fields = oClass.getDeclaredFields();
-                for (int i = 0; i < fields.length; i++) {
-                    buffer.append(tabs.toString());
-                    fields[i].setAccessible(true);
-                    buffer.append(fields[i].getName());
-                    buffer.append("=");
-                    try {
-                        Object value = fields[i].get(o);
-                        if (value != null) {
-                            if (value.getClass().isPrimitive() ||
-                                    value.getClass() == java.lang.Long.class ||
-                                    value.getClass() == java.lang.String.class ||
-                                    value.getClass() == java.lang.Integer.class ||
-                                    value.getClass() == java.lang.Boolean.class
-                                    ) {
-                                buffer.append(value);
-                            } else {
-                                buffer.append(dump(value, callCount));
-                            }
-                        }
-                    } catch (IllegalAccessException e) {
-                        buffer.append(e.getMessage());
-                    }
-                    buffer.append("\n");
-                }
-                oClass = oClass.getSuperclass();
-            }
-            buffer.append(tabs.toString());
-            buffer.append("}\n");
-        }
-        return buffer.toString();
+
+    private int i;
+
+    private void say() {
+        System.out.println("say");
     }
 
     public static void main(String[] args) {
-        dump(new HashMap<String, Object>(), 4);
+        Class<Dump> clazz = Dump.class;
+        try {
+            Object o = clazz.newInstance();
+            Method m = clazz.getDeclaredMethod("say");
+            if(!m.isAccessible()) m.setAccessible(true);
+            m.invoke(o);
+            Field f = clazz.getDeclaredField("i");
+            if(!f.isAccessible()) f.setAccessible(true);
+            f.set(o, 23);
+            System.out.println(f.get(o));
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 }
