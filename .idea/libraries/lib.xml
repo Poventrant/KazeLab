@@ -43,6 +43,9 @@
     <SOURCES>
       <root url="jar://$USER_HOME$/.ideaLibSources/commons-pool2-2.3-sources.jar!/" />
       <root url="jar://$USER_HOME$/.ideaLibSources/jedis-2.8.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-aop-4.2.5.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-context-4.2.5.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-beans-4.2.5.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

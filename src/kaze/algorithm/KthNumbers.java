@@ -1,6 +1,7 @@
 package kaze.algorithm;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class KthNumbers {
 
@@ -40,14 +41,6 @@ public class KthNumbers {
         }
     }
 
-    public static void toDescSort(int [] arr, int[] result, int len) {
-        for(int i = 0; i < len; ++ i) {
-            result[i] = arr[0];
-            arr[0] = arr[len-i];
-            adjust(arr, 0, len - i - 1);
-        }
-    }
-
     public static void maxHeapSort(int [] A, int len, int k) {
         for(int i = k; i < len; ++ i) {
             if(A[0] > A[i]) {
@@ -58,7 +51,7 @@ public class KthNumbers {
     }
 
     public static void main(String[] args) {
-        int result [] = new KthNumbers().findKthNumbers(new int[] {3188,4522,2526,4085,1621,723,1073}, 7, 6);
+        int result [] = new KthNumbers().findKthNumbers(new int[] {3188,4522,2526,4085,1621,723,1073}, 7, 2);
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
         }

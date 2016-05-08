@@ -1,8 +1,5 @@
-package kaze.thread;
+package kaze.juc;
 import java.lang.reflect.Field;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import sun.misc.Unsafe;
 
@@ -33,6 +30,15 @@ public class UnsafeTest {
         }
         final Target target = new Target();
         Field intFiled = clazz.getDeclaredField("intParam");
+
+
+        boolean cas;
+        while(!(cas = unsafe.compareAndSwapInt(target, 12, 0, 10))) {
+            System.out.println(cas);
+        }
+        System.out.println(unsafe.compareAndSwapInt(target, 12, 10, 10));
+        System.out.println(target.intParam);
+
 //        int a = (Integer) intFiled.get(target);
 //        System.out.println("原始值是:" + a);
 //        //intParam的字段偏移是12 原始值是3 我们要改为10

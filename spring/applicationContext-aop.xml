@@ -50,7 +50,7 @@
         </property>
     </bean>-->
 
-    <bean id="hijackAroundMethodBean" class="com.mkyong.aop.HijackAroundMethod" />
+    <!--<bean id="hijackAroundMethodBean" class="com.mkyong.aop.HijackAroundMethod" />
 
     <bean id="customerServiceProxy"
           class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -62,6 +62,23 @@
                 <value>hijackAroundMethodBean</value>
             </list>
         </property>
+    </bean>-->
+
+    <bean id="outputService" class="com.pwq.aspect.OutputServiceImpl">
+    </bean>
+
+    <bean id="helloWorldService" class="com.pwq.aspect.HelloWorldServiceImpl">
+        <property name="text" value="Hello World!"></property>
+        <property name="outputService" ref="outputService"></property>
+    </bean>
+
+    <bean id="autoProxyCreator" class="org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator"></bean>
+
+    <bean id="timeInterceptor" class="com.pwq.aspect.TimerInterceptor"></bean>
+
+    <bean id="aspectjAspect" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"></property>
+        <property name="expression" value="execution(* com.pwq.aspect.*.*(..))"></property>
     </bean>
 
 </beans>
