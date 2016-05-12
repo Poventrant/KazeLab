@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD) //can use in method only.
-public @interface Test {
+public @interface KazeTest {
 
 	//should ignore this test?
 	public boolean enabled() default true;

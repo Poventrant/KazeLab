@@ -37,29 +37,29 @@ public class RunTest {
 
 	}
 
-	// Process @Test
+	// Process @KazeTest
 	for (Method method : obj.getDeclaredMethods()) {
 
-		// if method is annotated with @Test
-		if (method.isAnnotationPresent(Test.class)) {
+		// if method is annotated with @KazeTest
+		if (method.isAnnotationPresent(KazeTest.class)) {
 
-			Annotation annotation = method.getAnnotation(Test.class);
-			Test test = (Test) annotation;
+			Annotation annotation = method.getAnnotation(KazeTest.class);
+			KazeTest test = (KazeTest) annotation;
 
 			// if enabled = true (default)
 			if (test.enabled()) {
 
 			  try {
 				method.invoke(obj.newInstance());
-				System.out.printf("%s - Test '%s' - passed %n", ++count, method.getName());
+				System.out.printf("%s - KazeTest '%s' - passed %n", ++count, method.getName());
 				passed++;
 			  } catch (Throwable ex) {
-				System.out.printf("%s - Test '%s' - failed: %s %n", ++count, method.getName(), ex.getCause());
+				System.out.printf("%s - KazeTest '%s' - failed: %s %n", ++count, method.getName(), ex.getCause());
 				failed++;
 			  }
 
 			} else {
-				System.out.printf("%s - Test '%s' - ignored%n", ++count, method.getName());
+				System.out.printf("%s - KazeTest '%s' - ignored%n", ++count, method.getName());
 				ignore++;
 			}
 

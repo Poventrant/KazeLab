@@ -1,7 +1,6 @@
 package com.pwq;
 
 import com.pwq.entity.User;
-import com.pwq.service.KazeServiceImpl;
 import com.pwq.service.PwqServiceImpl;
 import com.pwq.service.UserService;
 import com.pwq.test.SpringAction;

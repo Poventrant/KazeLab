@@ -22,6 +22,11 @@ public class IteratorTest implements Iterable<Integer>{
             public Integer next() {
                 return ints[index++];
             }
+
+            @Override
+            public void remove() {
+
+            }
         };
     }
 

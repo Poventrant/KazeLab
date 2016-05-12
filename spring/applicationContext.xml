@@ -78,8 +78,8 @@
                 <prop key="hibernate.query.substitutions"> true 'Y', false 'N' </prop>
 
                 <!-- 2级缓存 -->
-                <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <!--<prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>-->
 
                 <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.format_sql">false</prop>
@@ -147,7 +147,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <tx:annotation-driven/>
+    <!--<tx:annotation-driven/>-->
 
     <!-- 扫描cn.zeale.service包下所有标注@Service的服务组件 -->
     <context:component-scan base-package="com.pwq.controller" />
@@ -161,9 +161,9 @@
         <property name="location" value="classpath:public.properties" />
     </bean>  -->
 
-   <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
-        <property name="test" value="pwq"></property>
-    </bean>-->
+    <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
+         <property name="test" value="pwq"></property>
+     </bean>-->
     <bean id="pwqService" class="com.pwq.service.PwqServiceImpl" >
         <constructor-arg index="0" type="java.lang.String" value="constructor pwq"></constructor-arg>
     </bean>
