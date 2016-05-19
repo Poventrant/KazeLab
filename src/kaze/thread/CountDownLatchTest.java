@@ -13,6 +13,17 @@ public class CountDownLatchTest extends Thread {
 
         try {
             System.out.println("等待2个子线程执行完毕...");
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        latch.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("sub thread await is avaliable!");
+                }
+            }.start();
             latch.await();
             System.out.println("2个子线程已经执行完毕");
             System.out.println("继续执行主线程");

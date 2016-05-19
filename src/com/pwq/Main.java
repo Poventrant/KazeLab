@@ -1,6 +1,6 @@
 package com.pwq;
 
-import com.pwq.entity.User;
+import com.pwq.aspect.HelloWorldService;
 import com.pwq.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,14 +8,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-		/*UserController userController = (UserController) appContext.getBean("userController");
-        userController.getUserService().add();*/
-
-        UserService userService = (UserService) appContext.getBean("userServiceImpl");
-
-        userService.add();
-        userService.add();
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
+        HelloWorldService hws = (HelloWorldService) appContext.getBean("helloWorldService");
+        hws.helloWorld();
+//        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		/*UserController userController = (UserController) appContext.getBean("userController");
+//        userController.getUserService().add();*/
+//
+//        UserService userService = (UserService) appContext.getBean("userServiceImpl");
+//
+//        userService.add();
+//        userService.add();
 
 //        System.out.println(userService.sum());
 //
