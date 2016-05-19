@@ -12,7 +12,7 @@ public class Main {
         HelloWorldService hws = (HelloWorldService) appContext.getBean("helloWorldService");
         hws.helloWorld();
 //        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-//		/*UserController userController = (UserController) appContext.getBean("userController");
+//		  UserController userController = (UserController) appContext.getBean("userController");
 //        userController.getUserService().add();*/
 //
 //        UserService userService = (UserService) appContext.getBean("userServiceImpl");

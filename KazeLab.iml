@@ -77,8 +77,9 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="gson-2.6.2" level="project" />
     <orderEntry type="library" name="aspectjrt" level="project" />
-    <orderEntry type="library" name="proxool-0.9.1" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.6.1" level="project" />
+    <orderEntry type="library" name="proxool-0.9.11" level="project" />
+    <orderEntry type="library" name="org.aspectj:aspectjweaver:1.8.9" level="project" />
   </component>
 </module>
