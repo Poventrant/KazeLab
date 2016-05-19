@@ -1,0 +1,10 @@
+mongod --dbpath "C:\Program Files\MongoDB\Server\3.2\data"
+
+
+21d5ec85d8a38d20ee23c323de04983e
+
+-Dapplication.path="." -Dplay.id="test"  -XX:-UseSplitVerifier
+添加play framework下面testrunner的jar
+
+
+MaseterConfigServiceImpl.java改成getAESPassword
