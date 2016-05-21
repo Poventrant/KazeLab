@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="aspectjrt">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://F:/GIT/hrmall/WebContent/WEB-INF/lib/aspectjrt.jar!/" />
+      <root url="jar://F:/GIT/hrmall/WebContent/WEB-INF/lib/aspectjweaver.jar!/" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>
