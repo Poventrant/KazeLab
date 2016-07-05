@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="customerService" class="com.mkyong.customer.services.CustomerService">
+        <property name="name" value="Yong Mook Kim" />
+        <property name="url" value="http://www.mkyong.com" />
+    </bean>
+
+<!--    <bean id="hijackBeforeMethodBean" class="com.mkyong.aop.HijackBeforeMethod" />
+
+    <bean id="customerServiceProxy"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target" ref="customerService" />
+
+        <property name="interceptorNames">
+            <list>
+                <value>hijackBeforeMethodBean</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <!--<bean id="hijackAfterMethodBean" class="com.mkyong.aop.HijackAfterMethod" />
+
+    <bean id="customerServiceProxy"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target" ref="customerService" />
+
+        <property name="interceptorNames">
+            <list>
+                <value>hijackAfterMethodBean</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <!--<bean id="hijackThrowExceptionBean" class="com.mkyong.aop.HijackThrowException" />
+
+    <bean id="customerServiceProxy"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target" ref="customerService" />
+
+        <property name="interceptorNames">
+            <list>
+                <value>hijackThrowExceptionBean</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <!--<bean id="hijackAroundMethodBean" class="com.mkyong.aop.HijackAroundMethod" />
+
+    <bean id="customerServiceProxy"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target" ref="customerService" />
+
+        <property name="interceptorNames">
+            <list>
+                <value>hijackAroundMethodBean</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <bean id="outputService" class="com.pwq.aspect.OutputServiceImpl">
+    </bean>
+
+    <bean id="helloWorldService" class="com.pwq.aspect.HelloWorldServiceImpl">
+        <property name="text" value="Hello World!"></property>
+        <property name="outputService" ref="outputService"></property>
+    </bean>
+
+    <bean id="autoProxyCreator" class="org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator"></bean>
+
+    <bean id="timeInterceptor" class="com.pwq.aspect.TimerInterceptor"></bean>
+
+    <bean id="aspectjAspect" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"></property>
+        <property name="expression" value="execution(* com.pwq.aspect.*.*(..))"></property>
+    </bean>
+
+</beans>

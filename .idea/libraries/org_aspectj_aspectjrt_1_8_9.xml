@@ -4,6 +4,7 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjrt/1.8.9/aspectjrt-1.8.9.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjrt/1.8.9/aspectjrt-1.8.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjrt/1.8.9/aspectjrt-1.8.9.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
