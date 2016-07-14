@@ -22,11 +22,16 @@ public class SelectorExample {
 
         // Get server socket channel and register with selector
         ServerSocketChannel serverSocket = ServerSocketChannel.open();
-        InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
-        serverSocket.bind(hostAddress);
+        InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);;
+        serverSocket.socket().bind(hostAddress, 100);
+        serverSocket.socket().setSoTimeout(20000);
         serverSocket.configureBlocking(false);
         int ops = serverSocket.validOps();
         SelectionKey selectKy = serverSocket.register(selector, ops, null);
+
+//        NioBufferHandler bufhandler = new NioBufferHandler(256, 256, false);
+//        bufhandler.getReadBuffer().clear();
+//        bufhandler.getWriteBuffer().clear();
 
         for (; ; ) {
 
@@ -52,6 +57,7 @@ public class SelectorExample {
                     client.register(selector, SelectionKey.OP_READ);
 
                     System.out.println("Accepted new connection from client: " + client);
+
                 } else if (ky.isReadable()) {
 
                     // Read the data from client
@@ -63,7 +69,7 @@ public class SelectorExample {
 
                     System.out.println("Message read from client: " + output);
 
-                    if (output.equals("Bye.")) {
+                    if (output.endsWith("Bye.")) {
 
                         client.close();
                         System.out.println("Client messages are complete; close.");
