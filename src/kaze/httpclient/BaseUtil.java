@@ -30,28 +30,26 @@ import java.util.List;
 public class BaseUtil {
 
     static class NestedHttpClient {
-        private static CloseableHttpClient httpclient = null;
-        public static CloseableHttpClient getHttpClient() {
-            if (httpclient == null) {
-                synchronized (BaseUtil.class) {         //double check
-                    if (httpclient == null) {
-                        HttpRequestRetryHandler myRetryHandler = new HttpRequestRetryHandler() {
-                            public boolean retryRequest(IOException arg0, int executionCount, HttpContext arg2) {
-                                System.out.println(executionCount + " times connecting failed, try again...");
-                                if (executionCount > 5) {
-                                    System.out.println("Fail to connect, exit.");
-                                    return false;
-                                }
-                                return true;
-                            }
-                        };
-//                        HttpHost proxy = new HttpHost("127.0.0.1", 8888);       //开发时用
-                        httpclient = HttpClients.custom().setRetryHandler(myRetryHandler)/*.setProxy(proxy)*/.build();
+        static {
+            HttpRequestRetryHandler myRetryHandler = new HttpRequestRetryHandler() {
+                public boolean retryRequest(IOException arg0, int executionCount, HttpContext arg2) {
+                    System.out.println(executionCount + " times connecting failed, try again...");
+                    if (executionCount > 5) {
+                        System.out.println("Fail to connect, exit.");
+                        return false;
                     }
+                    return true;
                 }
-            }
-            return httpclient;
+            };
+//          HttpHost proxy = new HttpHost("127.0.0.1", 8888);       //开发时用
+            httpclient = HttpClients.custom().setRetryHandler(myRetryHandler)/*.setProxy(proxy)*/.build();
         }
+
+        private static CloseableHttpClient httpclient = null;
+    }
+
+    private static CloseableHttpClient getHttpClient() {
+        return NestedHttpClient.httpclient;
     }
 
     public static HttpGet getHttpGet(String url) {
@@ -75,7 +73,7 @@ public class BaseUtil {
 
     public static void main(String[] args) {
 
-        CloseableHttpClient httpclient = NestedHttpClient.getHttpClient();
+        CloseableHttpClient httpclient = getHttpClient();
 
         HttpPost httppost = getHttpPost("http://gdxg.sysu.edu.cn/index.php/Article/update.html");
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");

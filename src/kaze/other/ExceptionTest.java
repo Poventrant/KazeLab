@@ -55,7 +55,7 @@ public class ExceptionTest {
     public static void main(String[]args) {
 //        try {
 //            test(new int[] {0, 1, 2, 3, 4, 5});
-//        } catch (Exception e) {
+//        } catch (ExceptionLab e) {
 //            System.out.print("E");
 //        }
 //        ignoreException();

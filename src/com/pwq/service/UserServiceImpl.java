@@ -11,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-/**
- * Created by 枫叶 on 2016/3/20.
- */
 @Service
 @Lazy(true)
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {

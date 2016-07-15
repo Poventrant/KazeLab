@@ -4,24 +4,29 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Created by 枫叶 on 2016/4/28.
- */
+
 public class TcpServer {
     public static void main(String[] args) {
-        File file = new File("C:/Users/lenovo/Desktop/socket.txt");
-        if(!file.exists()) file.mkdirs();
-        byte[] buf = new byte[1024];
+        ServerSocket serverSocket = null;
         try {
-            ServerSocket serverSocket = new ServerSocket(8888);
-            Socket socket = serverSocket.accept();
-            DataInputStream dis = new DataInputStream(socket.getInputStream());
-            System.out.println(dis.readUTF());
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            dos.writeUTF("hellow");
-            dos.flush();
+            serverSocket = new ServerSocket(8087);
+            Socket socket = null;
+            while(true) {
+                socket = serverSocket.accept();
+                DataInputStream dis = new DataInputStream(socket.getInputStream());
+                System.out.println(dis.readUTF());
+                DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+                dos.writeUTF("helloworld");
+                //close_time handle things...
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

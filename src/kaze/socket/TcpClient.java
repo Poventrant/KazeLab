@@ -2,7 +2,6 @@ package kaze.socket;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.Socket;
 
 /**
@@ -11,10 +10,12 @@ import java.net.Socket;
 public class TcpClient {
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("localhost", 8888);
+            Socket socket = new Socket("localhost", 8087);
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF("yo man~");
             dos.flush();
+            socket.shutdownOutput();
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

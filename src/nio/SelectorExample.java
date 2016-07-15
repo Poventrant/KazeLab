@@ -12,6 +12,8 @@ import java.net.InetSocketAddress;
 
 public class SelectorExample {
 
+    protected static NioBufferHandler bufHandler = new NioBufferHandler(256, 256, false);
+
     public static void main(String[] args)
             throws IOException {
 
@@ -21,13 +23,13 @@ public class SelectorExample {
         System.out.println("Selector open: " + selector.isOpen());
 
         // Get server socket channel and register with selector
-        ServerSocketChannel serverSocket = ServerSocketChannel.open();
-        InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);;
-        serverSocket.socket().bind(hostAddress, 100);
-        serverSocket.socket().setSoTimeout(20000);
-        serverSocket.configureBlocking(false);
-        int ops = serverSocket.validOps();
-        SelectionKey selectKy = serverSocket.register(selector, ops, null);
+        ServerSocketChannel ssc = ServerSocketChannel.open();
+        InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
+        ssc.socket().bind(hostAddress, 100);
+        ssc.socket().setSoTimeout(20000);
+        ssc.configureBlocking(false);
+        int ops = ssc.validOps();
+        SelectionKey selectKy = ssc.register(selector, ops, null);
 
 //        NioBufferHandler bufhandler = new NioBufferHandler(256, 256, false);
 //        bufhandler.getReadBuffer().clear();
@@ -50,14 +52,13 @@ public class SelectorExample {
                 if (ky.isAcceptable()) {
 
                     // Accept the new client connection
-                    SocketChannel client = serverSocket.accept();
+                    SocketChannel client = ssc.accept();
                     client.configureBlocking(false);
 
                     // Add the new connection to the selector
                     client.register(selector, SelectionKey.OP_READ);
 
                     System.out.println("Accepted new connection from client: " + client);
-
                 } else if (ky.isReadable()) {
 
                     // Read the data from client

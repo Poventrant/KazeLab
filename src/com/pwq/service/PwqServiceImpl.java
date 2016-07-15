@@ -1,18 +1,19 @@
 package com.pwq.service;
 
-/**
- * Created by 枫叶 on 2016/3/20.
- */
-public class PwqServiceImpl {
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PwqServiceImpl implements PwqService{
 
     private String test;
 
-    PwqServiceImpl(String test) {
-        this.test = test;
+    PwqServiceImpl() {
+        this.test = "pwq";
     }
 
     public void add() {
-        System.out.println("KazeServiceImpl0");
+        System.out.println("PwqServiceImpl");
     }
 
     public int sum() {

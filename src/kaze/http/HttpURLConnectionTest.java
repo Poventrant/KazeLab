@@ -20,7 +20,7 @@
 //
 //    public final static Map<String, String> sessionMap = new HashMap<String, String>();
 //
-//    public static void main(String[] args) throws Exception {
+//    public static void main(String[] args) throws ExceptionLab {
 //
 //        HttpURLConnectionTest http = new HttpURLConnectionTest();
 //
@@ -45,7 +45,7 @@
 //        System.out.println(tokenMap1);
 //    }
 //
-//    private Map<String, String> sendPost(String url, List<AbstractMap.SimpleEntry<String, String>> params) throws Exception {
+//    private Map<String, String> sendPost(String url, List<AbstractMap.SimpleEntry<String, String>> params) throws ExceptionLab {
 //
 //        URL obj = new URL(url);
 //        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -97,7 +97,7 @@
 //       return resultMap;
 //    }
 //
-//    private void sendGet() throws Exception {
+//    private void sendGet() throws ExceptionLab {
 //
 //        String url = "https://www.baidu.com/";
 //

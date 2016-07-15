@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-/**
- * Created by kaze on 16-3-19.
- */
 public interface UserService extends BaseService<User>{
     void add();
 
