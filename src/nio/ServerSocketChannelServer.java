@@ -20,6 +20,8 @@ public class ServerSocketChannelServer {
 
             SocketChannel socket = serverSock.accept();
 
+            socket.configureBlocking(false);
+
             while (true) {
                 ByteBuffer buffer = ByteBuffer.allocate(256);
                 socket.read(buffer);
