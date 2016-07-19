@@ -1,14 +1,12 @@
 package nio;
 
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.nio.channels.Selector;
-import java.nio.channels.SelectionKey;
-import java.nio.ByteBuffer;
 import java.io.IOException;
-import java.util.Set;
-import java.util.Iterator;
+import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.*;
+import java.util.Iterator;
+import java.util.Set;
 
 public class SelectorExample {
 
@@ -17,6 +15,7 @@ public class SelectorExample {
     public static void main(String[] args)
             throws IOException {
 
+        String filePath = SelectorExample.class.getClassLoader().getResource("oscache.properties").getFile();
         // Get selector
         Selector selector = Selector.open();
 
@@ -51,6 +50,7 @@ public class SelectorExample {
 
                     // Accept the new client connection
                     SocketChannel client = ssc.accept();
+                    client.socket().setSoTimeout(20000);
                     client.configureBlocking(false);
 
                     // Add the new connection to the selector
@@ -68,13 +68,26 @@ public class SelectorExample {
                         buffer.clear();
                         client.read(buffer);
                         byte [] bytes = new byte[buffer.position()];
-                        buffer.flip();
+                        buffer.rewind(); //or flip
                         buffer.get(bytes);
                         String output = new String(bytes);
                         System.out.println("Message read from client: " + output);
 
                         buffer.clear();
-                        buffer.put("got it".getBytes());
+
+                        RandomAccessFile out = new RandomAccessFile(filePath, "rw");
+                        FileChannel fc = out.getChannel();
+                        int bytesread = fc.read(buffer);
+                        while (bytesread != -1) {
+                            buffer.flip();
+                            client.write(buffer);
+                            buffer.compact();
+                            bytesread = fc.read(buffer);
+                        }
+                        // 为了让客户端有时间将上面的数据都从channel中读出来，使得之后能单独的读取到"done!"
+                        Thread.sleep(1000);
+                        buffer.clear();
+                        buffer.put("done!".getBytes());
                         buffer.flip();
                         client.write(buffer);
 
@@ -83,6 +96,7 @@ public class SelectorExample {
                             System.out.println("Client messages are complete; close.");
                         }
                     } catch (Exception e) {
+                        e.printStackTrace();
                         if(client != null) {
                             client.close();
                         }

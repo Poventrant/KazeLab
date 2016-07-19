@@ -13,7 +13,7 @@ public class SocketClientExample {
         InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
         SocketChannel client = SocketChannel.open(hostAddress);
 
-        NioBufferHandler bufhandler = new NioBufferHandler(256, 256, false);
+        ByteBuffer buffer = ByteBuffer.allocate(256);
 
         System.out.println("Client sending messages to server...");
 
@@ -23,18 +23,28 @@ public class SocketClientExample {
 
         for (int i = 0; i < messages.length; i++) {
 
+            buffer.clear();
             byte [] message = messages[i].getBytes();
-            ByteBuffer buffer = bufhandler.getWriteBuffer();
             buffer.put(message);
-            buffer.rewind();    //or flip
+            buffer.flip();
             client.write(buffer);
 
-            ByteBuffer buffer1 = bufhandler.getReadBuffer();
-            client.read(buffer1);
-            System.out.println(new String(buffer1.array()).trim());
-
-            bufhandler.reset();
-            Thread.sleep(1000);
+            buffer.clear();
+            int flag = client.read(buffer);
+            client.configureBlocking(false);
+            while (flag != -1) {
+                byte[] dst = new byte[buffer.position()];
+                buffer.flip();
+                buffer.get(dst);
+                String data = new String(dst);
+                System.out.print(data);
+                buffer.clear();
+                if("done!".equals(data)) break;
+                flag = client.read(buffer);
+            }
+            buffer.clear();
+            client.configureBlocking(true);
+            Thread.sleep(250);
         }
 
         client.close();				
