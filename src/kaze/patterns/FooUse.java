@@ -5,5 +5,7 @@ public class FooUse {
         Foo f = Foo.INSTANCE;
         f.print();
         f.testThread(10);
+        Foo t = Foo.INSTANCE;
+        System.out.println(f == t);
     }
 }

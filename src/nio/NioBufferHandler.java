@@ -1,5 +1,6 @@
 package nio;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class NioBufferHandler {
@@ -27,6 +28,11 @@ public class NioBufferHandler {
 
     public ByteBuffer getWriteBuffer() {
         return writebuf;
+    }
+
+    public void reset() throws IOException {
+        readbuf.clear();
+        writebuf.clear();
     }
 
 }

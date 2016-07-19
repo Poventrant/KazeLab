@@ -1,9 +1,9 @@
 package nio;
 
-import java.nio.channels.SocketChannel;
-import java.nio.ByteBuffer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
 public class SocketClientExample {
 
@@ -13,6 +13,8 @@ public class SocketClientExample {
         InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
         SocketChannel client = SocketChannel.open(hostAddress);
 
+        NioBufferHandler bufhandler = new NioBufferHandler(256, 256, false);
+
         System.out.println("Client sending messages to server...");
 
         // Send messages to server
@@ -21,13 +23,18 @@ public class SocketClientExample {
 
         for (int i = 0; i < messages.length; i++) {
 
-            byte [] message = new String(messages [i]).getBytes();
-            ByteBuffer buffer = ByteBuffer.wrap(message);
+            byte [] message = messages[i].getBytes();
+            ByteBuffer buffer = bufhandler.getWriteBuffer();
+            buffer.put(message);
+            buffer.rewind();    //or flip
             client.write(buffer);
 
-            System.out.println(messages [i]);
-            buffer.clear();
-            Thread.sleep(3000);
+            ByteBuffer buffer1 = bufhandler.getReadBuffer();
+            client.read(buffer1);
+            System.out.println(new String(buffer1.array()).trim());
+
+            bufhandler.reset();
+            Thread.sleep(1000);
         }
 
         client.close();				

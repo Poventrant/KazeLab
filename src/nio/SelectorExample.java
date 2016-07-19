@@ -31,9 +31,7 @@ public class SelectorExample {
         int ops = ssc.validOps();
         SelectionKey selectKy = ssc.register(selector, ops, null);
 
-//        NioBufferHandler bufhandler = new NioBufferHandler(256, 256, false);
-//        bufhandler.getReadBuffer().clear();
-//        bufhandler.getWriteBuffer().clear();
+        ByteBuffer buffer = ByteBuffer.allocate(256);
 
         for (; ; ) {
 
@@ -56,25 +54,40 @@ public class SelectorExample {
                     client.configureBlocking(false);
 
                     // Add the new connection to the selector
-                    client.register(selector, SelectionKey.OP_READ);
+                    client.register(selector, SelectionKey.OP_READ, new KeyAttachment());
 
                     System.out.println("Accepted new connection from client: " + client);
                 } else if (ky.isReadable()) {
+                    SocketChannel client = null;
+                    try {
+                        // Read the data from client
+                        KeyAttachment keyAttachment = (KeyAttachment) ky.attachment();
+                        System.out.println(keyAttachment.name);
+                        client = (SocketChannel) ky.channel();
 
-                    // Read the data from client
+                        buffer.clear();
+                        client.read(buffer);
+                        byte [] bytes = new byte[buffer.position()];
+                        buffer.flip();
+                        buffer.get(bytes);
+                        String output = new String(bytes);
+                        System.out.println("Message read from client: " + output);
 
-                    SocketChannel client = (SocketChannel) ky.channel();
-                    ByteBuffer buffer = ByteBuffer.allocate(256);
-                    client.read(buffer);
-                    String output = new String(buffer.array()).trim();
+                        buffer.clear();
+                        buffer.put("got it".getBytes());
+                        buffer.flip();
+                        client.write(buffer);
 
-                    System.out.println("Message read from client: " + output);
-
-                    if (output.endsWith("Bye.")) {
-
-                        client.close();
-                        System.out.println("Client messages are complete; close.");
+                        if (output.endsWith("Bye.")) {
+                            client.close();
+                            System.out.println("Client messages are complete; close.");
+                        }
+                    } catch (Exception e) {
+                        if(client != null) {
+                            client.close();
+                        }
                     }
+
 
                 } // end if (ky...)
 
@@ -83,5 +96,9 @@ public class SelectorExample {
             } // end while loop
 
         } // end for loop
+    }
+
+    static class KeyAttachment {
+        String name = "kaze";
     }
 }

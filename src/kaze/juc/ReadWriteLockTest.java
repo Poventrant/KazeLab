@@ -91,26 +91,10 @@ public class ReadWriteLockTest {
             }
         }, "reader4");
 
-        Thread writer2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    lock.writeLock().lockInterruptibly();
-                    i ++;
-                    System.out.println(Thread.currentThread().getName());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    lock.writeLock().unlock();
-                }
-            }
-        }, "writer2");
-
         writer1.start();
         reader1.start();
         reader2.start();
         reader3.start();
         reader4.start();
-//        writer2.start();
     }
 }
