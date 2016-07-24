@@ -45,7 +45,7 @@ public class UserServiceImplAspect {
         return result;
     }
 
-    @Around("execution(* com.pwq.service.AspectTest.*(..))")
+    @Around("execution(* com.pwq.service.AspectImpl.*(..))")
     public Object check0(ProceedingJoinPoint proceedingJoinPoint) {
         System.out.println("before AspectTest check");
         Object result = null;

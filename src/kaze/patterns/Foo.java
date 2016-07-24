@@ -3,6 +3,10 @@ package kaze.patterns;
 public enum Foo {
     INSTANCE;
 
+    static {
+        System.out.println("enum");
+    }
+
     public void print() {
         System.out.println("hello,world");
     }

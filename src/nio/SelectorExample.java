@@ -24,6 +24,7 @@ public class SelectorExample {
         // Get server socket channel and register with selector
         ServerSocketChannel ssc = ServerSocketChannel.open();
         InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
+        ssc.configureBlocking(false);
         ssc.socket().bind(hostAddress, 100);
         ssc.socket().setSoTimeout(20000);
         ssc.configureBlocking(false);

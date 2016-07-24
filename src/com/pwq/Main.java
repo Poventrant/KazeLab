@@ -1,10 +1,6 @@
 package com.pwq;
 
-import com.pwq.aspect.HelloWorldService;
-import com.pwq.aspect.UserServiceImplAspect;
-import com.pwq.controller.UserController;
-import com.pwq.service.AspectTest;
-import com.pwq.service.UserService;
+import com.pwq.service.Aspect;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,8 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
-        AspectTest ast = (AspectTest) appContext.getBean("aspectTest");
-        UserServiceImplAspect userServiceImplAspect = (UserServiceImplAspect) appContext.getBean("userServiceImplAspect");
+        Aspect ast = (Aspect) appContext.getBean("aspectImpl");
         ast.test();
 
 //        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
