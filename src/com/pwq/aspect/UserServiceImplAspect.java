@@ -1,6 +1,5 @@
 package com.pwq.aspect;
 
-import com.pwq.service.UserServiceImpl;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -34,8 +33,6 @@ public class UserServiceImplAspect {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }*/
-        UserServiceImpl usi = (UserServiceImpl) proceedingJoinPoint.getTarget();
-        System.out.println(usi.getTest());
         try {
             result = proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {
@@ -45,7 +42,7 @@ public class UserServiceImplAspect {
         return result;
     }
 
-    @Around("execution(* com.pwq.service.AspectImpl.*(..))")
+    @Around("execution(* com.pwq.service.AspectProxy.*(..))")
     public Object check0(ProceedingJoinPoint proceedingJoinPoint) {
         System.out.println("before AspectTest check");
         Object result = null;

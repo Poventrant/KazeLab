@@ -22,6 +22,8 @@ public class ThreadJoinTest implements Runnable{
             ts[i].join();
             System.out.println("????");
         }
+
+
     }
 
     @Override

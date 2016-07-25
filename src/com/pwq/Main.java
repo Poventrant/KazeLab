@@ -1,16 +1,17 @@
 package com.pwq;
 
-import com.pwq.service.Aspect;
-import org.springframework.context.ApplicationContext;
+import com.pwq.service.PwqService;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
-        Aspect ast = (Aspect) appContext.getBean("aspectImpl");
-        ast.test();
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
+        PwqService ast = (PwqService) appContext.getBean("pwqServiceImpl");
+        ast.add();
 
+        appContext.close();
 //        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 //		  UserController userController = (UserController) appContext.getBean("userController");
 //        userController.getUserService().add();*/

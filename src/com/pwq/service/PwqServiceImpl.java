@@ -26,4 +26,5 @@ public class PwqServiceImpl implements PwqService{
     public void setTest(String test) {
         this.test = test;
     }
+
 }
