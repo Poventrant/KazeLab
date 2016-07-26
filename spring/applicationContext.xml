@@ -11,81 +11,79 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
-        <property name="driver">
-            <value>com.mysql.jdbc.Driver</value>
+
+    <bean id="baseDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!-- pool sizing -->
+        <property name="initialPoolSize" value="10" />
+        <property name="minPoolSize" value="10" />
+        <property name="maxPoolSize" value="100" />
+        <property name="acquireIncrement" value="3" />
+        <property name="maxStatements" value="0" />
+        <!-- retries -->
+        <property name="acquireRetryAttempts" value="30" />
+        <property name="acquireRetryDelay" value="1000" /> <!-- 1s -->
+        <property name="breakAfterAcquireFailure" value="false" />
+        <!-- refreshing connections -->
+        <property name="maxIdleTime" value="180" /> <!-- 3min -->
+        <property name="maxConnectionAge" value="10" /> <!-- 1h -->
+        <!-- timeouts and testing -->
+        <property name="checkoutTimeout" value="5000" /> <!-- 5s -->
+        <property name="idleConnectionTestPeriod" value="60" /> <!-- 60 -->
+        <property name="testConnectionOnCheckout" value="true" />
+        <property name="preferredTestQuery" value="SELECT 1" />
+        <property name="testConnectionOnCheckin" value="true" />
+    </bean>
+
+    <!-- 主数据源-->
+    <bean id="masterDataSource" parent="baseDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/kaze?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;useSSL=false" />
+        <property name="user" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    <!-- 从数据源-->
+    <bean id="slaveDataSource" parent="baseDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/pao?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;useSSL=false" />
+        <property name="user" value="root" />
+        <property name="password" value="root" />
+    </bean>
+
+    <bean id="dataSource" class="com.pwq.util.RoutingDataSource">
+        <property name="targetDataSources">
+            <map key-type="com.pwq.util.DataSourceType">
+                <entry key="MASTER" value-ref="masterDataSource"/>
+                <entry key="SLAVE" value-ref="slaveDataSource" />
+            </map>
         </property>
-        <property name="driverUrl">
-            <value>jdbc:mysql://localhost:3306/kaze?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true</value>
-        </property>
-        <property name="user">
-            <value>root</value>
-        </property>
-        <property name="password">
-            <value>root</value>
-        </property>
-        <property name="alias">
-            <value>kaze</value>
-        </property>
-        <!--保留线程处于睡眠状态的最长时间 -->
-        <property name="houseKeepingSleepTime">
-            <value>30000</value>
-        </property><!-- 默认 30000 -->
-        <property name="houseKeepingTestSql">
-            <value>select 1</value>
-        </property>
-        <!--可用的连接数量 -->
-        <property name="prototypeCount">
-            <value>30</value>
-        </property>
-        <!--线程的最长活动时间 -->
-        <property name="maximumActiveTime">
-            <value>300000</value>
-        </property><!-- 默认 300000 -->
-        <!--线程的最大寿命 -->
-        <property name="maximumConnectionLifetime">
-            <value>300000</value>
-        </property><!-- 默认 300000 -->
-        <!--最大的数据库连接数 -->
-        <property name="maximumConnectionCount">
-            <value>40</value>
-        </property>
-        <!--最小的数据库连接数 -->
-        <property name="minimumConnectionCount">
-            <value>10</value>
-        </property>
-        <!-- 是否记录proxool日志 -->
-        <property name="trace">
-            <value>true</value>
-        </property>
-        <property name="verbose">
-            <value>true</value>
-        </property>
+        <property name="defaultTargetDataSource" ref="masterDataSource" />
     </bean>
 
     <!-- Hibernate SessionFactory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-
         <!-- 自动扫描的包 -->
         <property name="packagesToScan" value="com.pwq.entity"/>
-
         <property name="hibernateProperties">
             <props>
                 <!-- MYSQL 数据库优化，不同数据库对应不同的key
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57InnoDBDialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.query.substitutions"> true 'Y', false 'N' </prop>
+                <prop key="hibernate.query.substitutions">
+                    true 'Y', false 'N'
+                </prop>
 
-                <!-- 2级缓存 -->
-                <!--<prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>-->
+                <!-- 2级缓存 发布到线上再开启，本地方便调试关闭-->
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <!-- 查询缓存 -->
+                <prop key="hibernate.cache.use_query_cache">false</prop>
 
                 <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <!-- 把所有的SQL语句都输出到控制台 。true：输出到控制台
-                <prop key="hibernate.show_sql">true</prop>-->
+                <prop key="hibernate.show_sql">false</prop>
+                <!--把所有的SQL语句都输出到控制台 。true：输出到控制台 发布到线上再改成false-->
+                <prop key="hibernate.show_sql">false</prop>
 
                 <!--连接池释放-->
                 <prop key="hibernate.connection.release_mode">auto</prop>
@@ -97,29 +95,29 @@
                 <prop key="hibernate.jdbc.batch_size">30</prop>
 
                 <prop key="hibernate.autoReconnect">true</prop>
+                <!-- 没表就自动建表，有的话则更新 -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!-- Turn batching off for better error messages under PostgreSQL
+                    <prop key="hibernate.jdbc.batch_size">0</prop> -->
             </props>
         </property>
     </bean>
 
+    <bean id="dataSourceAdvice" class="com.pwq.util.DataSourceAdvice" />
+    <aop:config>
+        <aop:advisor pointcut="execution(* com.pwq.service.*ServiceImpl.*(..))"
+                     advice-ref="dataSourceAdvice" />
+    </aop:config>
+
+
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="cacheManager" class="org.springmodules.cache.provider.oscache.OsCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:oscache.properties"/>
-    </bean>
-
-    <bean id="cacheProviderFacade" class="org.springmodules.cache.provider.oscache.OsCacheFacade">
-        <property name="cacheManager" ref="cacheManager"/>
-    </bean>
-
-    <bean id="cacheKeyGenerator" class="org.springmodules.cache.key.HashCodeCacheKeyGenerator"/>
 
     <!-- 开启切面自动代理 -->
-    <!--<aop:aspectj-autoproxy />-->
+    <aop:aspectj-autoproxy />
 
     <!--使用强大的切点表达式语言轻松定义目标方法 -->
     <aop:config>
@@ -153,32 +151,5 @@
     <context:component-scan base-package="com.pwq.controller" />
     <context:component-scan base-package="com.pwq.service" />
     <context:component-scan base-package="com.pwq.dao" />
-    <bean name="userServiceImplAspect" class="com.pwq.aspect.UserServiceImplAspect"></bean>
 
-
-    <!-- 此方式仅仅支持注解 不支持XML,如果要注入到代码中,bean要指定一个ID名称 -->
-    <!--  <bean id="public" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:public.properties" />
-    </bean>  -->
-
-    <!-- <bean id="pwqService" class="com.pwq.service.PwqServiceImpl">
-         <property name="test" value="pwq"></property>
-     </bean>-->
-    <bean id="pwqService" class="com.pwq.service.PwqServiceImpl" >
-        <constructor-arg index="0" type="java.lang.String" value="constructor pwq"></constructor-arg>
-    </bean>
-
-    <!--配置bean,配置后该类由spring管理-->
-    <bean name="springAction" class="com.pwq.test.SpringAction" >
-        <!--(3)使用静态工厂的方法注入对象,对应下面的配置文件(3)-->
-        <!--<property name="staticFactoryDao" ref="staticFactoryDao"></property>-->
-        <!--实例工厂注入-->
-        <property name="staticFactoryDao" ref="factoryInstance"></property>
-    </bean>
-
-    <!--(3)此处获取对象的方式是从工厂类中获取静态方法-->
-    <bean name="staticFactoryDao" class="com.pwq.test.StaticDaoFactory" factory-method="getStaticFactoryDaoImpl"></bean>
-
-    <bean name="instanceFactoryDao" class="com.pwq.test.InstanceDaoFactory" ></bean>
-    <bean name="factoryInstance" factory-bean="instanceFactoryDao" factory-method="getFactoryDaoImpl"></bean>
 </beans>

@@ -1,19 +1,14 @@
 package com.pwq.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * 2016-3-5 庞文全
  */
 @Entity
-@Table(name = "user", catalog = "kaze")
+@Table(name = "user")
 public class User implements java.io.Serializable {
 
 	private Integer id;

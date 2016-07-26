@@ -1,6 +1,6 @@
 package net.collections.test;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -20,5 +20,9 @@ public class ConcurrentMapTest {
         map.put("wen", 123);
         map.put("quan", 123);
         map.put("kaze", 321);
+
+        for (Map.Entry<String, Object> e : map.entrySet()) {
+            System.out.println(e.getKey());
+        }
     }
 }

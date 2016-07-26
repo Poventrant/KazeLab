@@ -1,15 +1,24 @@
 package com.pwq;
 
+import com.pwq.controller.UserController;
+import com.pwq.entity.User;
 import com.pwq.service.PwqService;
+import com.pwq.service.UserService;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         PwqService ast = (PwqService) appContext.getBean("pwqServiceImpl");
         ast.add();
+
+        UserController userController = (UserController) appContext.getBean("userController");
+        UserService userService = userController.getUserService();
+        User user = userService.get(1);
+        System.out.println(user.getName());
+        userService.add();
 
         appContext.close();
 //        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");

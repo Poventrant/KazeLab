@@ -1,28 +1,20 @@
 package com.pwq.dao;
 
+import org.apache.log4j.Logger;
+import org.hibernate.*;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.transform.Transformers;
+
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.sql.Connection;
+import java.util.*;
 import java.util.Map.Entry;
-
-import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 
 /**
  * @title 公用数据访问DaoImpl实现,实现基本的增删改查
@@ -279,6 +271,7 @@ public abstract class BaseDaoImpl<T> {
     };
 
     public T get(Serializable id) {
+        Connection con = ((SessionImplementor) getSession()).connection();
         return (T) getSession().get(entityClass, id);
     }
 
