@@ -5,20 +5,20 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 public class Server {
     private AsynchronousServerSocketChannel server;
-    
+
     public Server()throws IOException{
         server = AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(8888));
     }
     
     public void start() throws InterruptedException, ExecutionException, TimeoutException{
         Future<AsynchronousSocketChannel> future = server.accept();
+
+        System.out.println("before count down");
+
         AsynchronousSocketChannel socket = future.get();
        
         ByteBuffer readBuf = ByteBuffer.allocate(1024);

@@ -1,5 +1,8 @@
 package kaze.other;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,9 +24,14 @@ public class EqualsHashCodeTest {
         System.out.println(s1.equals(s2));
         System.out.println(s1.hashCode() == s2.hashCode());
 
+        Map<Student, Object> map = new HashMap<>();
+        System.out.println(map.put(s1, 123));
+        System.out.println(map.put(s2, 312));
     }
 
-    static class Student {
+    static class Student implements Serializable{
+        private final long serilazableID = 0;
+
         String id;
         String name;
         int age;

@@ -28,23 +28,23 @@ public class SocketClientExample {
             buffer.put(message);
             buffer.flip();
             client.write(buffer);
-
-            buffer.clear();
-            int flag = client.read(buffer);
-            client.configureBlocking(false);
-            while (flag != -1) {
-                byte[] dst = new byte[buffer.position()];
-                buffer.flip();
-                buffer.get(dst);
-                String data = new String(dst);
-                System.out.print(data);
-                buffer.clear();
-                if("done!".equals(data)) break;
-                flag = client.read(buffer);
-            }
-            buffer.clear();
-            client.configureBlocking(true);
-            Thread.sleep(250);
+//
+//            buffer.clear();
+//            int flag = client.read(buffer);
+//            client.configureBlocking(false);
+//            while (flag != -1) {
+//                byte[] dst = new byte[buffer.position()];
+//                buffer.flip();
+//                buffer.get(dst);
+//                String data = new String(dst);
+//                System.out.print(data);
+//                buffer.clear();
+//                if("done!".equals(data)) break;
+//                flag = client.read(buffer);
+//            }
+//            buffer.clear();
+//            client.configureBlocking(true);
+//            Thread.sleep(250);
         }
 
         client.close();				

@@ -6,11 +6,11 @@ public class QuickSortKthMaxNumber {
 	//快速排序实现部分排序，找出前K个大的数
 	
 	public static int partition(int [] sort, int left, int right) {
-		int l = left, r = right;
-		int key = sort[l];
-		while(l < r) {
-			while(sort[l] <= key && l < right) ++ l;
-			while(sort[r] >= key && r > left) -- r;
+		int key = sort[left];
+        int l = left, r = right;
+        while(l < r) {
+			while(l <= r && sort[l] <= key) ++ l;
+			while(r >= l && sort[r] >= key ) -- r;
 			if(l < r) {
 				int temp = sort[l];
 				sort[l] = sort[r];
