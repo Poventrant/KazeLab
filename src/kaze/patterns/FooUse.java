@@ -6,6 +6,6 @@ public class FooUse {
         f.print();
         f.testThread(10);
         Foo t = Foo.INSTANCE;
-        System.out.println(f == t);
+        System.out.println(f.o == t.o);
     }
 }

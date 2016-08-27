@@ -4,33 +4,31 @@ import java.util.Random;
 public class QuickSortKthMaxNumber {
 	
 	//快速排序实现部分排序，找出前K个大的数
-	
+
 	public static int partition(int [] sort, int left, int right) {
 		int key = sort[left];
         int l = left, r = right;
         while(l < r) {
-			while(l <= r && sort[l] <= key) ++ l;
-			while(r >= l && sort[r] >= key ) -- r;
-			if(l < r) {
-				int temp = sort[l];
-				sort[l] = sort[r];
-				sort[r] = temp;
-			}
+            while(r > l && sort[r] > key ) -- r;
+            while(l < r && sort[l] <= key) ++ l;
+            int temp = sort[l];
+            sort[l] = sort[r];
+            sort[r] = temp;
 		}
-		if(l == r || l-1 == r) {
+		if(l == r) {
 			sort[left] = sort[r];
 			sort[r] = key;
 		}
 		return r;
 	}
-	
+
 	public static void qSort(int sort[], int left, int right) {
 		if(left >= right || sort == null) return;
 		int pos = partition(sort, left, right);
 		qSort(sort, left, pos - 1);
 		qSort(sort, pos + 1, right);
 	}
-	
+
 	/*
 	 * 查找函数第K大的数
 	 */
@@ -49,12 +47,12 @@ public class QuickSortKthMaxNumber {
 			}
 		}
 	}
-	
+
 	public static void main(String [] args) {
 		Random ran = new Random();
-		int [] sort = new int [50];
+		int [] sort = new int [10];
 		for(int i = 0; i < sort.length; ++ i){
-			sort[i] = ran.nextInt(50);
+			sort[i] = ran.nextInt(10);
 		}
 		System.out.print("beforeSorting:");
 		for(int i = 0; i < sort.length; ++ i){

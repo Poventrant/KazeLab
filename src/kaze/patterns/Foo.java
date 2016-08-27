@@ -4,8 +4,10 @@ public enum Foo {
     INSTANCE;
 
     static {
-        System.out.println("enum");
+        System.out.println(Foo.class);
     }
+
+    Object o = new Object();
 
     public void print() {
         System.out.println("hello,world");
