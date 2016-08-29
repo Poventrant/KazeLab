@@ -9,7 +9,7 @@ public class TcpServer {
     public static void main(String[] args) {
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(8087);
+            serverSocket = new ServerSocket(8081);
             Socket socket = null;
             while(true) {
                 socket = serverSocket.accept();

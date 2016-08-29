@@ -20,7 +20,7 @@ public class ThreadJoinTest implements Runnable{
         }
         for (int i = len-1; i >= 0 ; i--) {
             ts[i].join();
-            System.out.println("????");
+            System.out.println(Thread.currentThread() + "????");
         }
 
 
@@ -29,7 +29,7 @@ public class ThreadJoinTest implements Runnable{
     @Override
     public void run() {
         try {
-            Thread.sleep(sleepTime);
+            Thread.sleep(100);
             System.out.println(Thread.currentThread().getId());
         } catch (InterruptedException e) {
             e.printStackTrace();

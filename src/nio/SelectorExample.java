@@ -30,6 +30,7 @@ public class SelectorExample {
         ssc.configureBlocking(false);
         int ops = ssc.validOps();
         SelectionKey selectKy = ssc.register(selector, ops, null);
+        selectKy.cancel();
 
         ByteBuffer buffer = ByteBuffer.allocate(256);
 
@@ -55,7 +56,9 @@ public class SelectorExample {
                     client.configureBlocking(false);
 
                     // Add the new connection to the selector
-                    client.register(selector, SelectionKey.OP_READ, new KeyAttachment());
+                    KeyAttachment att = new KeyAttachment();
+                    SelectionKey selectionKey = client.register(selector, SelectionKey.OP_READ, att);
+                    att.setSelectionKey(selectionKey);
 
                     System.out.println("Accepted new connection from client: " + client);
                 } else if (ky.isReadable()) {
@@ -63,7 +66,7 @@ public class SelectorExample {
                     try {
                         // Read the data from client
                         KeyAttachment keyAttachment = (KeyAttachment) ky.attachment();
-                        System.out.println(keyAttachment.name);
+                        System.out.println(keyAttachment.getSelectionKey());
                         client = (SocketChannel) ky.channel();
 
                         buffer.clear();
@@ -114,6 +117,14 @@ public class SelectorExample {
     }
 
     static class KeyAttachment {
-        String name = "kaze";
+        private SelectionKey selectionKey = null;
+
+        public SelectionKey getSelectionKey() {
+            return selectionKey;
+        }
+
+        public void setSelectionKey(SelectionKey selectionKey) {
+            this.selectionKey = selectionKey;
+        }
     }
 }

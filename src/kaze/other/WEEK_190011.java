@@ -15,10 +15,13 @@ public class WEEK_190011 {
         int interval = year - 1900;
         if(interval <= 0) return 0;
         int count = interval / 4;
+        //因为1900 + 100 = 2000 就是闰年
         int hundred = interval - 100;
         if(hundred > 0) {
+            //有多少个世纪年
             int temp = hundred / 100;
-            count = count - temp - temp / 4;
+            //世纪年中能被4整除的才是闰年
+            count = count - temp + temp / 4;
         }
         return count;
     }
