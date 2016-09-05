@@ -39,5 +39,6 @@ public class ThreadLocalTest {
 
         System.out.println(test.getLong());
         System.out.println(test.getString());
+
     }
 }

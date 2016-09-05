@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 /**
  * Created by uc on 2016/3/21.
  */
-public class Entity<T> {
+public abstract class Entity<T> {
 
     private Class<T> entityClass;
 

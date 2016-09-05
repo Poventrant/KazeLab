@@ -11,18 +11,11 @@ import java.util.Map;
 /**
  * Created by uc on 2016/3/21.
  */
-public class GenTypeTest extends Entity<User>{
+public class GenTypeTest{
+
     public static void main(String[] args) {
-        GenTypeTest gtt = new GenTypeTest();
+        UserEntity gtt = new UserEntity();
         System.out.println(gtt.getEntityClass());
 
-        try {
-            Field field = String.class.getDeclaredField("hash");
-            Type type = field.getGenericType();
-//            String typeName = ((Class) type).getTypeName();
-//            System.out.println(typeName);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
     }
 }

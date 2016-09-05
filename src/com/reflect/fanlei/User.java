@@ -1,14 +1,9 @@
 package com.reflect.fanlei;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
 /**
  * 2016-3-5 庞文全
  */
-public class User implements java.io.Serializable {
+public class User {
 
 	private Integer id;
 	private String name;

@@ -1,4 +1,4 @@
-package kaze.kaze.algorithm;
+package kaze.algorithm;
 
 import java.util.Random;
 

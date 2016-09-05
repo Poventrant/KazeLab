@@ -55,7 +55,7 @@ public class LockSupportTest {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
