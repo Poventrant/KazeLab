@@ -6,14 +6,10 @@ package kaze.algorithm;
 public class GCD {
 
     private static int gcd(int a, int b) {
-        if(a<b) return gcd(b,a);
-        if(b==0) return a;
-        else {
-            return gcd(a-b, b);
-        }
+        return b == 0 ? a : gcd(b, a % b);
     }
 
     public static void main(String[] args) {
-        System.out.println(gcd(81, 995));
+        System.out.println(gcd(598443985, 815));
     }
 }
