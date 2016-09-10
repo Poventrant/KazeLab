@@ -3,33 +3,53 @@ package kaze.other;
 import java.util.Scanner;
 
 /**
- * Created by kaze on 2016/9/8.
+ http://www.nowcoder.com/practice/655a43d702cd466093022383c24a38bf?tpId=49&tqId=29295&rp=2&ru=/ta/2016test&qru=/ta/2016test/question-ranking
  */
 public class NOWCODER_REVERSER {
 
-    static int isReverser(StringBuilder str) {
-        int l = 0, h = str.length()-1;
-        while(l<h) {
-            if(str.charAt(l) != str.charAt(h)) {
-                return l;
+    final static int[] mask = new int[2];
+
+    static boolean isReverser(StringBuilder str) {
+        mask[0] = 0;
+        mask[1] = str.length()-1;
+        while(mask[0]<=mask[1]) {
+            if(str.charAt(mask[0]) != str.charAt(mask[1])) {
+                return false;
             }
-            ++l;
-            --h;
+            ++mask[0];
+            --mask[1];
         }
-        return -1;
+        return true;
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        process:
         while (in.hasNext()) {
             StringBuilder line = new StringBuilder(in.next());
-            if(isReverser(line) == -1) {
+            if(isReverser(line)) {
                 System.out.println("YES");
                 continue;
             }
-            for (int i = 0; i < line.length(); i++) {
-//                String str = line.setCharAt(i, );
+            for (int i = 0; i < line.length()/2; i++) {
+                line.insert(mask[0], line.charAt(mask[1]));
+                int o0 = mask[0], o1 = mask[1];
+                if(isReverser(line)) {
+                    System.out.println("YES");
+                    continue process;
+                }
+                line.deleteCharAt(o0);
+
+                line.insert(o1+1, line.charAt(o0));
+                if(isReverser(line)) {
+                    System.out.println("YES");
+                    continue process;
+                }
+                line.deleteCharAt(o1+1);
+                mask[0] = o0;
+                mask[1] = o1;
             }
+            System.out.println("No");
         }
     }
 }
