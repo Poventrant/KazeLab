@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
  */
 public class Farther<E extends AbstractTest> {
 
-    private Class<E> entityClass;
+    protected Class<E> entityClass;
 
     Farther() {
         Class c =  getClass();
