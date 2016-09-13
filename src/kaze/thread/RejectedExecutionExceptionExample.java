@@ -9,7 +9,8 @@ public class RejectedExecutionExceptionExample {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ExecutorService executor = new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(15));
+        ExecutorService executor = new ThreadPoolExecutor(3, 3, 0L,
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(15));
 
         Worker tasks[] = new Worker[20];
         for (int i = 0; i < 10; i++) {

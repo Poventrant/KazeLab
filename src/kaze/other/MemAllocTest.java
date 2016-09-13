@@ -4,6 +4,7 @@ package kaze.other;
  * Created by 枫叶 on 2016/4/28.
  */
 public class MemAllocTest {
+    static int x = 0;
     public static void main(String[] args) {
         int a = 3;
         int b = 3;
@@ -14,5 +15,6 @@ public class MemAllocTest {
         Integer e = 128;
         Integer f = 128;
         System.out.println(e == f);
+
     }
 }
