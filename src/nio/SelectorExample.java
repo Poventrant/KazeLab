@@ -51,7 +51,7 @@ public class SelectorExample {
                 if (ky.isAcceptable()) {
 
                     // Accept the new client connection
-                    SocketChannel client = ssc.accept();
+                    SocketChannel client = ((ServerSocketChannel) ky.channel()).accept();
                     client.socket().setSoTimeout(20000);
                     client.configureBlocking(false);
 

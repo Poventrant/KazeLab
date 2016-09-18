@@ -38,7 +38,7 @@ public class TopK {
     }
 
     public static void main(String[] args) {
-        int len = 50, K = len / 10;
+        int len = 500, K = len / 10;
         int sort[] = new int[len];
         Random rand = new Random();
         System.out.print("before sorting: ");
@@ -47,6 +47,7 @@ public class TopK {
             System.out.print(sort[i] + " ");
         }
         System.out.println();
+        long startTime = System.currentTimeMillis();
         //建堆
         int heap[] = new int[K];
         for (int i = 0; i < K; i++) {
@@ -70,7 +71,7 @@ public class TopK {
             heap[i] = tmp;
             minHeapAdjust(heap, 0, i);
         }
-
+        System.out.println("cost time " + (System.currentTimeMillis() - startTime));
         System.out.print("top K is ");
         for (int i = 0; i < K; i++) {
             System.out.print(heap[i] + " ");
