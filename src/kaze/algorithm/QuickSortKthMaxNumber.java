@@ -21,6 +21,12 @@ public class QuickSortKthMaxNumber {
 //            }
 //            return -1;
 //        }
+        //快排随机化
+//        int randKey = left + new Random().nextInt(right - left + 1);
+//        int tmp = sort[randKey];
+//        sort[randKey] = sort[left];
+//        sort[left] = tmp;
+
         int key = sort[left];
         int l = left, r = right;
         while(l < r) {

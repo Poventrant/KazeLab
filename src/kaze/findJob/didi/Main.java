@@ -1,4 +1,4 @@
-package kaze.didi;
+package kaze.findJob.didi;
 
 import java.util.LinkedList;
 import java.util.List;

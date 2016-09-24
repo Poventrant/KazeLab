@@ -1,4 +1,4 @@
-package kaze.didi;
+package kaze.findJob.didi;
 
 import java.util.Scanner;
 
