@@ -2,6 +2,7 @@ package kaze.findJob.baidu;
 
 /**
  * Created by kaze on 2016/9/26.
+ * 合并多个有序链表
  */
 public class MergeSortedLists {
     static class Node {

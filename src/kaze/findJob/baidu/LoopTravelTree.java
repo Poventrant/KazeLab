@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Created by kaze on 2016/9/25.
+ * 非递归实现数的遍历
  */
 public class LoopTravelTree {
     static class Node {

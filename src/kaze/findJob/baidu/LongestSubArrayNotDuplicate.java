@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * Created by kaze on 2016/9/25.
+ * 字符串最长无重复子串
  */
 public class LongestSubArrayNotDuplicate {
 
@@ -37,7 +38,12 @@ public class LongestSubArrayNotDuplicate {
         return str.substring(maxStart, maxStart + maxLen);
     }
 
-    static String findNoDul(String str) {
+    /**
+     * 复杂度 O(n)
+     * @param str
+     * @return
+     */
+    private static String findNoDul(String str) {
         int len = 0;
         if (str == null || (len = str.length()) == 0) return null;
         char arr[] = str.toCharArray();

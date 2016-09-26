@@ -8,7 +8,7 @@ public class DoubleSqrt {
 
     private static double sqrt(double db) {
         double l = 0.0, h = db;
-        final double eps = 0.000000000000001;
+        final double eps = 1 >> 31;
         while (Math.abs(h - l) > eps) {
             double mid = (h + l) / 2.0;
             double tmp = mid * mid - db;
@@ -24,7 +24,7 @@ public class DoubleSqrt {
     }
 
     public static void main(String[] args) {
-        System.out.println(sqrt(9997368478.357));
-        System.out.println(Math.sqrt(9997368478.357));
+        System.out.println(sqrt(9997368478.32399057));
+        System.out.println(Math.sqrt(9997368478.32399057));
     }
 }
