@@ -9,40 +9,31 @@ public class PrecisionMultiplication {
 
     public static void main(String[] args) {
 
-        int ai[] = new int[10];
-        int bi[] = new int[10];
-        int resi[] = new int[10];
-
-        String as, bs;
+        char[] as, bs;
         Scanner input = new Scanner(System.in);
-        as = input.next();
-        bs = input.next();
+        as = input.next().toCharArray();
+        bs = input.next().toCharArray();
 
-        int alen = as.length(), blen = bs.length();
-        for (int i = 0; i < alen; i++) ai[alen - i] = as.charAt(i) - 48;
-        for (int i = 0; i < blen; i++) bi[blen - i] = bs.charAt(i) - 48;
+        int ai[] = new int[as.length];
+        int bi[] = new int[bs.length];
+        int resi[] = new int[as.length + bs.length];
 
-        for(int s : ai) {
-            System.out.print(s);
-        }
-        System.out.print("\n");
-        for(int s : bi) {
-            System.out.print(s);
-        }
-        System.out.print("\n");
+        int alen = as.length, blen = bs.length;
+        for (int i = 0; i < alen; i++) ai[alen - i - 1] = as[i] - 48;
+        for (int i = 0; i < blen; i++) bi[blen - i - 1] = bs[i] - 48;
 
-        for (int i = 1; i <= alen; i++) {
-            int x = 0;
-            for (int j = 1; j <= blen; j++) {
-                resi[i + j - 1] = ai[i] * bi[j] + x + resi[i + j - 1];
-                x = resi[i + j - 1] / 10;
-                resi[i + j - 1] %= 10;
+        for (int i = 0; i < alen; i++) {
+            for (int j = 0; j < blen; j++) {
+                resi[i + j] += ai[i] * bi[j];
+                resi[i + j + 1] += resi[i + j] / 10;
+                resi[i + j] %= 10;
             }
-            resi[i + blen] = x;
         }
-        int reslen = alen + blen;
+        int reslen = alen + blen - 1;
         while (resi[reslen] == 0 && reslen > 1) reslen--;
-        for (int i = reslen; i >= 1; i--) System.out.print(resi[i]);
-
+        for (int i = reslen; i >= 0; i--) {
+            System.out.print(resi[i]);
+        }
+        System.out.println();
     }
 }
