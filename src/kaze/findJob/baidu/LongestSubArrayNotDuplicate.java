@@ -40,6 +40,7 @@ public class LongestSubArrayNotDuplicate {
 
     /**
      * 复杂度 O(n)
+     *
      * @param str
      * @return
      */
@@ -47,17 +48,13 @@ public class LongestSubArrayNotDuplicate {
         int len = 0;
         if (str == null || (len = str.length()) == 0) return null;
         char arr[] = str.toCharArray();
-        int map[] = new int[256];
+        int[] map = new int[256], next = new int[len], first = new int[len + 1];
         Arrays.fill(map, len);
-        int next[] = new int[len], first[] = new int[len + 1];
         first[len] = len;
         for (int i = len - 1; i >= 0; i--) {
             next[i] = map[arr[i]];
-            map[arr[i]] = i;
-            if (next[i] < first[i + 1])
-                first[i] = next[i];
-            else
-                first[i] = first[i + 1];
+            map[arr[i]] =  i;
+            first[i] = Math.min(next[i], first[i + 1]);
         }
         int maxlen = 0, begin = 0;
         for (int i = 0; i < len; i++) {
@@ -66,11 +63,11 @@ public class LongestSubArrayNotDuplicate {
                 begin = i;
             }
         }
-        return str.substring(begin, maxlen + 1);
+        return str.substring(begin, begin + maxlen);
     }
 
     public static void main(String[] args) {
-        String str = "1234156789";
+        String str = "axbdebpqawuva";
         System.out.println(findNoDul(str));
     }
 }

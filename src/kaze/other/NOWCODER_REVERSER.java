@@ -11,9 +11,9 @@ public class NOWCODER_REVERSER {
 
     static boolean isReverser(StringBuilder str) {
         mask[0] = 0;
-        mask[1] = str.length()-1;
-        while(mask[0]<=mask[1]) {
-            if(str.charAt(mask[0]) != str.charAt(mask[1])) {
+        mask[1] = str.length() - 1;
+        while (mask[0] <= mask[1]) {
+            if (str.charAt(mask[0]) != str.charAt(mask[1])) {
                 return false;
             }
             ++mask[0];
@@ -24,32 +24,27 @@ public class NOWCODER_REVERSER {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        process:
         while (in.hasNext()) {
             StringBuilder line = new StringBuilder(in.next());
-            if(isReverser(line)) {
+            if (isReverser(line)) {
                 System.out.println("YES");
                 continue;
             }
-            for (int i = 0; i < line.length()/2; i++) {
-                line.insert(mask[0], line.charAt(mask[1]));
-                int o0 = mask[0], o1 = mask[1];
-                if(isReverser(line)) {
-                    System.out.println("YES");
-                    continue process;
-                }
-                line.deleteCharAt(o0);
-
-                line.insert(o1+1, line.charAt(o0));
-                if(isReverser(line)) {
-                    System.out.println("YES");
-                    continue process;
-                }
-                line.deleteCharAt(o1+1);
-                mask[0] = o0;
-                mask[1] = o1;
+            line.insert(mask[0], line.charAt(mask[1]));
+            int o0 = mask[0], o1 = mask[1];
+            if (isReverser(line)) {
+                System.out.println("YES");
+                continue;
             }
-            System.out.println("No");
+            line.deleteCharAt(o0);
+
+            line.insert(o1 + 1, line.charAt(o0));
+            if (isReverser(line)) {
+                System.out.println("YES");
+                continue;
+            }
+            line.deleteCharAt(o1 + 1);
+            System.out.println("NO");
         }
     }
 }

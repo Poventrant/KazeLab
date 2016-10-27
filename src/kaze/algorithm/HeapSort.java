@@ -2,25 +2,23 @@ package kaze.algorithm;
 
 import java.util.Random;
 
-public class heapSort {
+public class HeapSort {
     /*
 	 * 大顶堆排序，用于升序
 	 */
     public static void adjustMaxHeap(int sort[], int index, int n) {
-        int i = index;
-        int lc, maxc;
+        int i = index, lc, rc, maxc;
         while (true) {
-            lc = i * 2 + 1;                                        //数组下标从0开始，所以+1
-            if (lc < n) maxc = lc;
-            else break;
-            if (lc + 1 < n && sort[maxc] < sort[lc + 1])
-                maxc++;                                        //取得左右孩子中大的那个的下标
-            if (sort[maxc] > sort[i]) {                            //建立大顶堆
+            lc = (i << 1) + 1;                                        //数组下标从0开始，所以+1
+            rc = lc + 1;
+            maxc = i;
+            if (lc < n && sort[maxc] < sort[lc]) maxc = lc;
+            if (rc < n && sort[maxc] < sort[rc]) maxc = rc;   //取得左右孩子中大的那个的下标
+            if (maxc != i) {                            //建立大顶堆
                 int temp = sort[i];
                 sort[i] = sort[maxc];
                 sort[maxc] = temp;
                 i = maxc;                                        //以该孩子节点作为下一轮调整的父节点
-                continue;
             } else break;                                        //父节点比孩子节点都大，所以不用调整
         }
 
@@ -49,19 +47,16 @@ public class heapSort {
 
     }
 
-    public static void buildHeap(int sort[], int n) {
+    public static void heapSort(int[] sort, int n) {
+        //初始建堆
         for (int i = n / 2 - 1; i >= 0; i--) {
-            adjustMinHeap(sort, i, n);
+            adjustMaxHeap(sort, i, n);
         }
-    }
-
-    public static void hSort(int[] sort, int n) {
-        int len = n;
-        while (len > 0) {
-            int temp = sort[len - 1];
-            sort[len - 1] = sort[0];
+        while (n > 0) {
+            int temp = sort[n - 1];
+            sort[n - 1] = sort[0];
             sort[0] = temp;
-            adjustMinHeap(sort, 0, --len);
+            adjustMaxHeap(sort, 0, --n);
         }
     }
 
@@ -74,8 +69,7 @@ public class heapSort {
             sort[i] = rand.nextInt(1000);
             System.out.print(sort[i] + " ");
         }
-        buildHeap(sort, sort.length);
-        hSort(sort, sort.length);
+        heapSort(sort, sort.length);
         System.out.print("\nafter sorting: ");
         for (int e : sort) {
             System.out.print(e + " ");

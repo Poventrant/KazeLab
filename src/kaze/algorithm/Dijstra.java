@@ -15,7 +15,7 @@ public class Dijstra {
         Arrays.fill(dis, Integer.MAX_VALUE);
         System.arraycopy(map[s], 0, dis, 0, len);
         vis[s] = true;
-        for (int i = 0; i < len; i++) {
+        for (int[] ignored : map) {
             int min = Integer.MAX_VALUE, index = -1;
             for (int k = 0; k < len; k++) {
                 if (!vis[k] && dis[k] < min) {

@@ -19,8 +19,8 @@ public class PrecisionMultiplication {
         int resi[] = new int[as.length + bs.length];
 
         int alen = as.length, blen = bs.length;
-        for (int i = 0; i < alen; i++) ai[alen - i - 1] = as[i] - 48;
-        for (int i = 0; i < blen; i++) bi[blen - i - 1] = bs[i] - 48;
+        for (int i = 0; i < alen; i++) ai[alen - i - 1] = as[i] - '0';
+        for (int i = 0; i < blen; i++) bi[blen - i - 1] = bs[i] - '0';
 
         for (int i = 0; i < alen; i++) {
             for (int j = 0; j < blen; j++) {

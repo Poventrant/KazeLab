@@ -5,32 +5,32 @@ import java.util.Random;
 /**
  * Created by kaze on 16-3-6.
  */
-public class BoobSort {
+public class BubbleSort {
 
     static void sort(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
             boolean flag = false;
-            for (int j = 0; j < arr.length-i-1; j++) {
-                if(arr[j] > arr[j+1]) {
-                    int temp = arr[j+1];
-                    arr[j+1] = arr[j];
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
                     arr[j] = temp;
                     flag = true;
                 }
             }
-            if(!flag) {
+            if (!flag) {
                 System.out.println("\nalready sorted!!");
                 break;
             }
         }
     }
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         Random rand = new Random();
         int len = 10000;
-        int [] arr = new int[len];
+        int[] arr = new int[len];
         for (int i = 0; i < len; i++) {
-            arr[i] = rand.nextInt(len*10);
+            arr[i] = rand.nextInt(len * 10);
         }
         System.out.println("before:");
         for (int i = 0; i < len; i++) {
